@@ -1,7 +1,7 @@
-<form [formGroup]="newWord" (submit)="submitWord()" formGroupName="newWord">
-  <div>
-    <input [formControl]="foreignControl" type="text"  placeholder="foreign word" formControlName="foreignControl">
-    <input [formControl]="translatedControl" type="text"  placeholder="translation" formControlName="translatedControl">
+<form [formGroup]="newWord" (submit)="submitWord()" >
+  <div >
+    <input type="text"  placeholder="foreign word" formControlName="foreignControl">
+    <input type="text"  placeholder="translation" formControlName="translatedControl">
     <input type="submit" value="ok" >
   </div>
 </form>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WordRecord} from '../WordRecord';
 import {HttpClient} from '@angular/common/http';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 // noinspection TsLint
 @Component({
@@ -10,20 +10,34 @@ import {FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./wordlist.component.css']
 })
 export class WordlistComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+  private newWord: FormGroup;
+  private foreignControl: FormControl;
+  private translatedControl: FormControl;
+
+
+  constructor(private http: HttpClient,
+              private fb: FormBuilder) {
+    this.foreignControl = new FormControl();
+    this.translatedControl = new FormControl();
+
+    this.newWord = fb.group({
+      foreignControl: this.foreignControl,
+      translatedControl: this.translatedControl
+    });
+
+  }
 
   public wordList: WordRecord[] = [];
   wordsUrl = 'http://localhost:9090/all_words';
 
-  public newWord = new FormGroup({
+  /*public newWord = new FormGroup({
     foreignControl: new FormControl(),
     translatedControl: new FormControl()
   });
-
+*/
   public getList() {
-    return this.http.get(this.wordsUrl).subscribe(wordsList => {
-      this.wordList = wordsList;
-      this.wordList = this.wordList.reverse();
+    return this.http.get<WordRecord[]>(this.wordsUrl).subscribe(wordsList => {
+      this.wordList = wordsList.reverse();
     });
   }
 
@@ -33,7 +47,8 @@ export class WordlistComponent implements OnInit {
   }
 
   submitWord() {
-    console.log(this.newWord.value.foreignControl);
+    console.log(this.newWord.get('foreignControl').value);
+    console.log(this.newWord.get('translatedControl').value);
   }
 
 }
