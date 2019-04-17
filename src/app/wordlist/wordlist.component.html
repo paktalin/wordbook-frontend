@@ -1,14 +1,16 @@
 <form [formGroup]="newWord" (submit)="submitWord()" >
-  <div >
+  <div>
     <input type="text"  placeholder="foreign word" formControlName="foreignControl">
     <input type="text"  placeholder="translation" formControlName="translatedControl">
     <input type="submit" value="ok" >
   </div>
 </form>
 
+<!--
 <div *ngFor="let word of wordList">
   <input type="text"  [value]="word.foreign_word">
   <input type="text"  [value]="word.translated_word">
 </div>
+-->
 
 
