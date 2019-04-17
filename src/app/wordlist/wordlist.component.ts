@@ -10,13 +10,23 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class WordlistComponent implements OnInit {
 // hi
-  constructor(private http: HttpClient,
-              ) { }
+  constructor(private http: HttpClient) { }
 
   public wordList: WordRecord[] = [];
+  wordsUrl = 'http://localhost:9090/all_words';
+
+/*  public getList() {
+    this.wordList.push({foreignWord: 'ciao', translatedWord: 'hi'});
+    this.wordList.push({foreignWord: 'ciao', translatedWord: 'bye'});
+    this.wordList.push({foreignWord: 'grazie', translatedWord: 'thanks'});
+    this.wordList.push({foreignWord: 'prego', translatedWord: 'welcome'});
+  }*/
 
   public getList() {
-    this.http.get('http://localhost:9090', {headers: HttpHeaders.})
+    return this.http.get(this.wordsUrl).subscribe(list => {
+      console.log(list);
+      this.wordList = list;
+    });
   }
 
   ngOnInit() {
