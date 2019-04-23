@@ -15,5 +15,4 @@ export class WordRecord {
   public translated_word: string;
   public created: string;
   public id: number;
-
 }

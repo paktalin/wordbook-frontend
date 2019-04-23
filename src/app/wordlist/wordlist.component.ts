@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {WordRecord} from '../WordRecord';
+import {State} from '../State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
@@ -18,6 +19,7 @@ export class WordlistComponent implements OnInit {
     });
   }
   private newWord: FormGroup;
+  private state: State = State.None;
 
   public wordList: WordRecord[] = [];
   wordsUrl = 'http://localhost:9090/all_words';
@@ -40,8 +42,13 @@ export class WordlistComponent implements OnInit {
   }
 
   submitByEnter(event) {
+    const foreignWord = this.newWord.get('foreignControl').value;
+    const translatedWord = this.newWord.get('translatedControl').value;
+    if (foreignWord !== '' || translatedWord !== '') {
+      this.state = State.Add;
+    }
     if (event.key === 'Enter') {
-      const wordRecord = new WordRecord(this.newWord.get('foreignControl').value, this.newWord.get('translatedControl').value);
+      const wordRecord = new WordRecord(foreignWord, translatedWord);
       this.wordList.unshift(wordRecord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
@@ -50,6 +57,7 @@ export class WordlistComponent implements OnInit {
   }
 
   editWord(word) {
+    this.state = State.Edit;
     document.getElementById(this.generateForeignWordId(word.id)).disabled = false;
     document.getElementById(this.generateTranslatedId(word.id)).disabled = false;
   }
