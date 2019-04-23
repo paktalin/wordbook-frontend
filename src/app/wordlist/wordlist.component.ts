@@ -29,9 +29,9 @@ export class WordlistComponent implements OnInit {
   };
 
   public getList() {
-/*    return this.http.get<WordRecord[]>(this.wordsUrl).subscribe(wordsList => {
+    return this.http.get<WordRecord[]>(this.wordsUrl).subscribe(wordsList => {
       this.wordList = wordsList.reverse();
-    });*/
+    });
   }
 
   ngOnInit() {
@@ -41,7 +41,10 @@ export class WordlistComponent implements OnInit {
 
   submitWord() {
     const wordRecord = new WordRecord(this.newWord.get('foreignControl').value, this.newWord.get('translatedControl').value);
-    console.log(wordRecord);
-    this.http.post('http://localhost:9090/save_word', wordRecord, this.httpOptions);
+    this.wordList.unshift(wordRecord);
+    this.http.post('http://localhost:9090/save_word', wordRecord, this.httpOptions).subscribe();
+    this.newWord.controls.foreignControl.setValue('');
+    this.newWord.controls.translatedControl.setValue('');
+
   }
 }
