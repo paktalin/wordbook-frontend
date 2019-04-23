@@ -39,12 +39,21 @@ export class WordlistComponent implements OnInit {
     console.log(this.wordList);
   }
 
-  submitWord() {
-    const wordRecord = new WordRecord(this.newWord.get('foreignControl').value, this.newWord.get('translatedControl').value);
-    this.wordList.unshift(wordRecord);
-    this.http.post('http://localhost:9090/save_word', wordRecord, this.httpOptions).subscribe();
-    this.newWord.controls.foreignControl.setValue('');
-    this.newWord.controls.translatedControl.setValue('');
+  submitByEnter(event) {
+    if (event.key === 'Enter') {
+      const wordRecord = new WordRecord(this.newWord.get('foreignControl').value, this.newWord.get('translatedControl').value);
+      this.wordList.unshift(wordRecord);
+      this.newWord.controls.foreignControl.setValue('');
+      this.newWord.controls.translatedControl.setValue('');
+      this.http.post('http://localhost:9090/save_word', wordRecord, this.httpOptions).subscribe();
+    }
+  }
 
+  editWord(word) {
+    console.log(document.getElementById(word.foreign_word));
+  }
+
+  generateId(foreign) {
+    return foreign + 'blah';
   }
 }
