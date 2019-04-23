@@ -50,10 +50,15 @@ export class WordlistComponent implements OnInit {
   }
 
   editWord(word) {
-    console.log(document.getElementById(word.foreign_word));
+    document.getElementById(this.generateForeignWordId(word.id)).disabled = false;
+    document.getElementById(this.generateTranslatedId(word.id)).disabled = false;
   }
 
-  generateId(foreign) {
-    return foreign + 'blah';
+  generateForeignWordId(id) {
+    return 'foreign_' + id;
+  }
+
+  generateTranslatedId(id) {
+    return 'translated_' + id;
   }
 }
