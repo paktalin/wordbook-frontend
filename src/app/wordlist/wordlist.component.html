@@ -1,12 +1,14 @@
 <form [formGroup]="newWord" (keydown)="submitByEnter($event)" >
   <div>
-    <input type="text" placeholder="foreign word" formControlName="foreignControl">
+    <input #foreignWord type="text" placeholder="foreign word" formControlName="foreignControl">
     <input type="text"  placeholder="translation" formControlName="translatedControl">
   </div>
 </form>
 
 <div *ngFor="let word of wordList">
-  <input [id]="generateForeignWordId(word.id)" type="text" disabled="disabled" [value]="word.foreign_word">
-  <input [id]="generateTranslatedId(word.id)" type="text" disabled="disabled" [value]="word.translated_word">
-  <input type="button" value="Edit" (click)="editWord(word)">
+  <input #fw  type="text" disabled [value]="word.foreignWord" >
+  <input #tw  type="text" disabled [value]="word.translatedWord">
+  <input #editBtn  type="button" value="Edit" (click)="editWord(fw, tw, editBtn)">
+  <input #editBtn  type="button" value="Save" (click)="editWord(fw, tw, editBtn)">
+  <input #discardBtn type="button" value="Discard" (click)="">
 </div>

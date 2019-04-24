@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WordRecord} from '../WordRecord';
-import {State} from '../State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {State} from '../State';
 
 // noinspection TsLint
 @Component({
@@ -18,17 +18,16 @@ export class WordlistComponent implements OnInit {
       translatedControl: new FormControl()
     });
   }
-  private newWord: FormGroup;
-  private state: State = State.None;
 
+  private newWord: FormGroup;
   public wordList: WordRecord[] = [];
   wordsUrl = 'http://localhost:9090/all_words';
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
+  private state: State = State.None;
 
   public getList() {
     return this.http.get<WordRecord[]>(this.wordsUrl).subscribe(wordsList => {
@@ -44,9 +43,6 @@ export class WordlistComponent implements OnInit {
   submitByEnter(event) {
     const foreignWord = this.newWord.get('foreignControl').value;
     const translatedWord = this.newWord.get('translatedControl').value;
-    if (foreignWord !== '' || translatedWord !== '') {
-      this.state = State.Add;
-    }
     if (event.key === 'Enter') {
       const wordRecord = new WordRecord(foreignWord, translatedWord);
       this.wordList.unshift(wordRecord);
@@ -56,10 +52,19 @@ export class WordlistComponent implements OnInit {
     }
   }
 
-  editWord(word) {
-    this.state = State.Edit;
-    document.getElementById(this.generateForeignWordId(word.id)).disabled = false;
-    document.getElementById(this.generateTranslatedId(word.id)).disabled = false;
+  editWord(fw, tw, btn) {
+     console.log(this.state);
+     if (this.state === State.None) {
+       this.state = State.Edit;
+       fw.disabled = false;
+       tw.disabled = false;
+       btn.value = 'Save';
+     }
+     if (this.state === State.Edit){
+       
+     }
+     // document.getElementById(this.generateForeignWordId(word.id)).removeAttribute('disabled');
+     // document.getElementById(this.generateTranslatedId(word.id)).removeAttribute('disabled');
   }
 
   generateForeignWordId(id) {
