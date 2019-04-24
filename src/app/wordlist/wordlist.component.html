@@ -9,6 +9,6 @@
   <input #foreignField  type="text" disabled [value]="word.foreign_word" >
   <input #translatedField  type="text" disabled [value]="word.translated_word">
   <input #editBtn  *ngIf="state.toString() != 'Edit'" type="button" value="Edit" (click)="editWord(foreignField, translatedField, editBtn)">
-  <input #saveBtn *ngIf="state.toString() == 'Edit'" type="button" value="Save" (click)="saveChanges(word.id, foreignField, translatedField)">
-  <input #discardBtn *ngIf="state.toString() == 'Edit'" type="button" value="Discard" (click)="discardChanges(word.id, foreignField, translatedField)">
+  <input #saveBtn *ngIf="state.toString() == 'Edit'" type="button" value="Save" (click)="saveChanges(word, foreignField, translatedField)">
+  <input #discardBtn *ngIf="state.toString() == 'Edit'" type="button" value="Discard" (click)="discardChanges(word, foreignField, translatedField)">
 </div>

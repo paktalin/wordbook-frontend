@@ -45,10 +45,11 @@ export class WordlistComponent implements OnInit {
     const translatedWord = this.newWord.get('translatedControl').value;
     if (event.key === 'Enter') {
       const wordRecord = new WordRecord(foreignWord, translatedWord);
+      console.log(wordRecord);
       this.wordList.unshift(wordRecord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post(this.GlobalUrl + 'save_word', wordRecord, this.httpOptions).subscribe();
+      this.http.post(this.GlobalUrl + 'save_word', wordRecord, this.httpOptions).subscribe(error => console.log(error));
     }
   }
 
@@ -58,7 +59,6 @@ export class WordlistComponent implements OnInit {
        this.state = State.Edit;
        fw.disabled = false;
        tw.disabled = false;
-
      }
      if (this.state === State.Edit) {
 
@@ -67,10 +67,13 @@ export class WordlistComponent implements OnInit {
      // document.getElementById(this.generateTranslatedId(word.id)).removeAttribute('disabled');
   }
 
-  saveChanges(wordId: number, foreignField: HTMLInputElement, translatedField: HTMLInputElement) {
-    const wordRecord = new WordRecord(foreignField.value, translatedField.value, 1, wordId);
-    this.http.post(this.GlobalUrl + 'update_word/' + wordId, wordRecord, this.httpOptions).subscribe();
+  saveChanges(wordRecord: WordRecord, foreignField: HTMLInputElement, translatedField: HTMLInputElement) {
+    wordRecord.foreign_word = foreignField.value;
+    wordRecord.translated_word = translatedField.value;
+    this.http.put(this.GlobalUrl + 'update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
     this.state = State.None;
+    foreignField.disabled = true;
+    translatedField.disabled = true;
   }
 
 }
