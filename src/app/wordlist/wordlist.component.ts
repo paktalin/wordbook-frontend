@@ -21,7 +21,7 @@ export class WordlistComponent implements OnInit {
 
   private newWord: FormGroup;
   public wordList: WordRecord[] = [];
-  wordsUrl = 'http://localhost:9090/all_words';
+  private readonly GlobalUrl = 'http://localhost:9090/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export class WordlistComponent implements OnInit {
   private state: State = State.None;
 
   public getList() {
-    return this.http.get<WordRecord[]>(this.wordsUrl).subscribe(wordsList => {
+    return this.http.get<WordRecord[]>(this.GlobalUrl + 'all_words').subscribe(wordsList => {
       this.wordList = wordsList.reverse();
     });
   }
@@ -48,7 +48,7 @@ export class WordlistComponent implements OnInit {
       this.wordList.unshift(wordRecord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post('http://localhost:9090/save_word', wordRecord, this.httpOptions).subscribe();
+      this.http.post(this.GlobalUrl + 'save_word', wordRecord, this.httpOptions).subscribe();
     }
   }
 
@@ -58,20 +58,19 @@ export class WordlistComponent implements OnInit {
        this.state = State.Edit;
        fw.disabled = false;
        tw.disabled = false;
-       btn.value = 'Save';
+
      }
-     if (this.state === State.Edit){
-       
+     if (this.state === State.Edit) {
+
      }
      // document.getElementById(this.generateForeignWordId(word.id)).removeAttribute('disabled');
      // document.getElementById(this.generateTranslatedId(word.id)).removeAttribute('disabled');
   }
 
-  generateForeignWordId(id) {
-    return 'foreign_' + id;
+  saveChanges(wordId: number, foreignField: HTMLInputElement, translatedField: HTMLInputElement) {
+    const wordRecord = new WordRecord(foreignField.value, translatedField.value, 1, wordId);
+    this.http.post(this.GlobalUrl + 'update_word/' + wordId, wordRecord, this.httpOptions).subscribe();
+    this.state = State.None;
   }
 
-  generateTranslatedId(id) {
-    return 'translated_' + id;
-  }
 }
