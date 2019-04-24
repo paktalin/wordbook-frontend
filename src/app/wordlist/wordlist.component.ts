@@ -53,27 +53,37 @@ export class WordlistComponent implements OnInit {
     }
   }
 
-  editWord(fw, tw, btn) {
-     console.log(this.state);
-     if (this.state === State.None) {
-       this.state = State.Edit;
-       fw.disabled = false;
-       tw.disabled = false;
-     }
-     if (this.state === State.Edit) {
-
-     }
-     // document.getElementById(this.generateForeignWordId(word.id)).removeAttribute('disabled');
-     // document.getElementById(this.generateTranslatedId(word.id)).removeAttribute('disabled');
+  enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn) {
+    if (this.state === State.None) {
+      this.state = State.Edit;
+      foreignField.disabled = false;
+      translatedField.disabled = false;
+      editBtn.style.display = 'none';
+      saveBtn.style.display = 'inline';
+      discardBtn.style.display = 'inline';
+    }
   }
 
-  saveChanges(wordRecord: WordRecord, foreignField: HTMLInputElement, translatedField: HTMLInputElement) {
+  saveChanges(wordRecord: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
     wordRecord.foreign_word = foreignField.value;
     wordRecord.translated_word = translatedField.value;
     this.http.put(this.GlobalUrl + 'update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
-    this.state = State.None;
-    foreignField.disabled = true;
-    translatedField.disabled = true;
+    this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
   }
 
+  discardChanges(wordRecord: WordRecord, foreignField: HTMLInputElement, translatedField: HTMLInputElement, editBtn, saveBtn, discardBtn) {
+    console.log(typeof foreignField);
+    foreignField.value = wordRecord.foreign_word;
+    translatedField.value = wordRecord.translated_word;
+    this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
+  }
+
+  finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn) {
+    foreignField.disabled = true;
+    translatedField.disabled = true;
+    editBtn.style.display = 'inline';
+    saveBtn.style.display = 'none';
+    discardBtn.style.display = 'none';
+    this.state = State.None;
+  }
 }
