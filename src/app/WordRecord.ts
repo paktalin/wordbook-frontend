@@ -1,25 +1,25 @@
 export class WordRecord {
 
-/*  constructor(foreign_word: string, translated_word: string) {
-    console.log(foreign_word);
-    console.log(translated_word);
-    this.foreign_word = foreign_word;
-    this.translated_word = translated_word;
-    // TODO set user_id
-    this.user_id = 1;
+/*  constructor(foreignWord: string, translatedWord: string) {
+    console.log(foreignWord);
+    console.log(translatedWord);
+    this.foreignWord = foreignWord;
+    this.translatedWord = translatedWord;
+    // TODO set userId
+    this.userId = 1;
   }*/
-  constructor(foreign_word: string, translated_word: string, user_id?: number, word_id?: number) {
-    this.foreign_word = foreign_word;
-    this.translated_word = translated_word;
-    if (user_id) { this.user_id = user_id;
-    } else { this.user_id = 1; }
-    if (word_id) { this.id = word_id;
+  constructor(foreignWord: string, translatedWord: string, userId?: number, wordId?: number) {
+    this.foreignWord = foreignWord;
+    this.translatedWord = translatedWord;
+    if (userId) { this.userId = userId;
+    } else { this.userId = 1; }
+    if (wordId) { this.id = wordId;
     } else { this.id = null; }
   }
 
-  public user_id: number;
-  public foreign_word: string;
-  public translated_word: string;
+  public userId: number;
+  public foreignWord: string;
+  public translatedWord: string;
   public created: string;
   public id: number;
 }

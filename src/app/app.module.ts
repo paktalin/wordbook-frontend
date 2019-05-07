@@ -7,6 +7,7 @@ import { WordlistComponent } from './wordlist/wordlist.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,15 @@ import { LoginFormComponent } from './login-form/login-form.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        whitelistedDomains: ['localhost:9090']
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

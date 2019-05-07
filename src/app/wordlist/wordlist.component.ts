@@ -30,7 +30,7 @@ export class WordlistComponent implements OnInit {
   private state: State = State.None;
 
   public getList() {
-    return this.http.get<WordRecord[]>(this.GlobalUrl + 'all_words').subscribe(wordsList => {
+    return this.http.get<WordRecord[]>('/api/all_words').subscribe(wordsList => {
       this.wordList = wordsList.reverse();
     });
   }
@@ -49,7 +49,7 @@ export class WordlistComponent implements OnInit {
       this.wordList.unshift(wordRecord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post(this.GlobalUrl + 'save_word', wordRecord, this.httpOptions).subscribe(error => console.log(error));
+      this.http.post('save_word', wordRecord, this.httpOptions).subscribe(error => console.log(error));
     }
   }
 
@@ -65,16 +65,16 @@ export class WordlistComponent implements OnInit {
   }
 
   saveChanges(wordRecord: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
-    wordRecord.foreign_word = foreignField.value;
-    wordRecord.translated_word = translatedField.value;
-    this.http.put(this.GlobalUrl + 'update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
+    wordRecord.foreignWord = foreignField.value;
+    wordRecord.translatedWord = translatedField.value;
+    this.http.put('update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
     this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
   }
 
   discardChanges(wordRecord: WordRecord, foreignField: HTMLInputElement, translatedField: HTMLInputElement, editBtn, saveBtn, discardBtn) {
     console.log(typeof foreignField);
-    foreignField.value = wordRecord.foreign_word;
-    translatedField.value = wordRecord.translated_word;
+    foreignField.value = wordRecord.foreignWord;
+    translatedField.value = wordRecord.translatedWord;
     this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
   }
 
