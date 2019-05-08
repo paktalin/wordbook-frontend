@@ -28,6 +28,7 @@ export class WordlistComponent implements OnInit {
     })
   };
   private state: State = State.None;
+  isCollapsed: boolean;
 
   public getList() {
     return this.http.get<WordRecord[]>('/api/all_words').subscribe(wordsList => {
@@ -85,5 +86,21 @@ export class WordlistComponent implements OnInit {
     saveBtn.style.display = 'none';
     discardBtn.style.display = 'none';
     this.state = State.None;
+  }
+
+  sortByDate() {
+    this.wordList.sort((w1, w2) => w2.id - w1.id);
+  }
+
+  sortByForeign() {
+    this.wordList.sort((w1, w2) => w1.foreignWord.localeCompare(w2.foreignWord));
+  }
+
+  sortByTranslated() {
+    this.wordList.sort((w1, w2) => w1.translatedWord.localeCompare(w2.translatedWord));
+  }
+
+  sortByTagName() {
+    this.isCollapsed = !this.isCollapsed;
   }
 }

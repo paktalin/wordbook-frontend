@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
-import {AlertService} from "../alert.service";
+import {Router} from '@angular/router';
+import {AlertService} from '../alert.service';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  selector: 'app-reg-form',
+  templateUrl: './reg-form.component.html',
+  styleUrls: ['./reg-form.component.css']
 })
-export class LoginFormComponent {
+export class RegFormComponent {
 
   form: FormGroup;
 
@@ -24,23 +24,24 @@ export class LoginFormComponent {
     });
   }
 
-  login() {
+  register() {
     const val = this.form.value;
 
     if (val.email && val.password) {
-      this.authService.login(val.email, val.password)
+      this.authService.register(val.email, val.password)
         .subscribe(
           () => {
 
-            this.router.navigate( ['/all_words']);
+            this.router.navigate( ['/login']);
           },
           error => {
-            if (error.status === 403) {
+            if (error.status === 400) {
               this.alertService.setMessage(error.error.message);
             }
           }
         );
     }
   }
+
 
 }
