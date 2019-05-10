@@ -21,7 +21,6 @@ export class WordlistComponent implements OnInit {
 
   private newWord: FormGroup;
   public wordList: WordRecord[] = [];
-  private readonly GlobalUrl = 'http://localhost:9090/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -50,7 +49,7 @@ export class WordlistComponent implements OnInit {
       this.wordList.unshift(wordRecord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post('save_word', wordRecord, this.httpOptions).subscribe(error => console.log(error));
+      this.http.post('api/save_word', wordRecord, this.httpOptions).subscribe(error => console.log(error));
     }
   }
 
@@ -68,7 +67,7 @@ export class WordlistComponent implements OnInit {
   saveChanges(wordRecord: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
     wordRecord.foreignWord = foreignField.value;
     wordRecord.translatedWord = translatedField.value;
-    this.http.put('update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
+    this.http.put('api/update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
     this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
   }
 
