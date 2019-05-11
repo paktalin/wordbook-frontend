@@ -1,13 +1,4 @@
 export class WordRecord {
-
-/*  constructor(foreignWord: string, translatedWord: string) {
-    console.log(foreignWord);
-    console.log(translatedWord);
-    this.foreignWord = foreignWord;
-    this.translatedWord = translatedWord;
-    // TODO set userId
-    this.userId = 1;
-  }*/
   constructor(foreignWord: string, translatedWord: string, userId?: number, wordId?: number) {
     this.foreignWord = foreignWord;
     this.translatedWord = translatedWord;

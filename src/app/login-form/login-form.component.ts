@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
-import {AlertService} from "../alert.service";
+import {AlertService} from '../alert.service';
 
 @Component({
   selector: 'app-login-form',
@@ -31,8 +31,7 @@ export class LoginFormComponent {
       this.authService.login(val.email, val.password)
         .subscribe(
           () => {
-
-            this.router.navigate( ['/all_words']);
+            this.router.navigate( ['api/all_words']);
           },
           error => {
             if (error.status === 403) {

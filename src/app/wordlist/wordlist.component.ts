@@ -102,4 +102,9 @@ export class WordlistComponent implements OnInit {
   sortByTagName() {
     this.isCollapsed = !this.isCollapsed;
   }
+
+  addTag(word: WordRecord, tagField: HTMLInputElement, addTagBtn: HTMLButtonElement) {
+    tagField.style.display = 'inline';
+    addTagBtn.innerHTML = 'Save tag';
+  }
 }
