@@ -19,7 +19,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     const user = new User(username, password);
-    return this.http.post<string>('/api/login', user, {responseType:'text'})
+    return this.http.post<any>('/api/login', user)
       .pipe(map(result => {
         if (result) {
           localStorage.setItem('access_token', result);
