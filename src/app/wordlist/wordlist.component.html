@@ -1,13 +1,4 @@
-<div>
-  <p>Sort by</p>
-    <button (click)="sortByDate()">Date</button>
-    <button (click)="sortByForeign()">Foreign</button>
-    <button (click)="sortByTranslated()">Translated</button>
-    <button (click)="sortByTagName()">Tag</button>
-  <br/>
-  <input *ngIf="isCollapsed" placeholder="Tag name">
-    <br><br/>
-</div>
+<app-sorting [wordList]="wordList"></app-sorting>
 
 <form [formGroup]="newWord" (keydown)="submitByEnter($event)" >
   <div>
@@ -16,16 +7,6 @@
   </div>
 </form>
 
-<div *ngFor="let word of wordList">
-  <input #foreignField  type="text" disabled [value]="word.foreignWord" >
-  <input #translatedField  type="text" disabled [value]="word.translatedWord">
-  <button #editBtn (click)="enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn)">Edit</button>
-  <button #saveBtn style="display: none;" (click)="saveChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Save</button>
-  <button #discardBtn style="display: none;" (click)="discardChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Discard</button>
+<app-word-field *ngFor="let word of wordList" [word]="word">
 
-  <div style="display: inline;">
-    <button #addTagBtn (click)="addTag(word, tagField)">Add tag</button>
-    <button #saveTagBtn (click)="saveTag(word, tagField, addTagBtn)">Add tag</button>
-    <input #tagField type="text" style="display: none;">
-  </div>
-</div>
+</app-word-field>

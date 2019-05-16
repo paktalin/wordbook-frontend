@@ -31,10 +31,11 @@ export class LoginFormComponent {
       this.authService.login(val.email, val.password)
         .subscribe(
           () => {
-            this.router.navigate( ['api/all_words']);
+            this.router.navigate( ['/words']);
           },
           error => {
-            if (error.status === 403) {
+            if (error.status === 400) {
+              console.log(error.error.message);
               this.alertService.setMessage(error.error.message);
             }
           }

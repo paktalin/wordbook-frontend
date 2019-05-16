@@ -1,4 +1,4 @@
-<a routerLink="/register">Register</a>
+<div id="g"><a routerLink="/register">Register</a></div>
 <form [formGroup]="form">
   <fieldset>
     <legend>Login</legend>
@@ -13,6 +13,6 @@
     </div>
   </fieldset>
   <div class="form-buttons">
-    <button class="button button-primary" (click)="login()">Login</button>
+    <button (click)="login()">Login</button>
   </div>
 </form>

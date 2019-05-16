@@ -21,9 +21,8 @@ export class AuthService {
     const user = new User(username, password);
     return this.http.post<any>('/api/login', user)
       .pipe(map(result => {
-        if (result) {
-          localStorage.setItem('access_token', result);
-          console.log(localStorage.getItem('access_token'));
+        if (result && result.token) {
+          localStorage.setItem('access_token', result.token);
         }
       }));
   }

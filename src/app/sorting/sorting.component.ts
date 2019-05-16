@@ -1,0 +1,38 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {WordRecord} from "../WordRecord";
+
+@Component({
+  selector: 'app-sorting',
+  templateUrl: './sorting.component.html',
+  styleUrls: ['./sorting.component.css']
+})
+export class SortingComponent implements OnInit {
+  @Input() wordList: WordRecord[];
+  isCollapsed: boolean;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+  sortByDate() {
+    this.wordList.sort((w1, w2) => w2.id - w1.id);
+  }
+
+  sortByForeign() {
+    this.wordList.sort((w1, w2) => w1.foreignWord.localeCompare(w2.foreignWord));
+  }
+
+  sortByTranslated() {
+    this.wordList.sort((w1, w2) => w1.translatedWord.localeCompare(w2.translatedWord));
+  }
+
+  sortByTagName() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+  addTag(word: WordRecord, tagField: HTMLInputElement, addTagBtn: HTMLButtonElement) {
+    tagField.style.display = 'inline';
+    addTagBtn.innerHTML = 'Save tag';
+  }
+
+}
