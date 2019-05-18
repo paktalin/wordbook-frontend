@@ -1,20 +1,18 @@
 <form [formGroup]="form">
-  <fieldset>
-    <legend>Join us!</legend>
-    <div class="form-field">
-      <label>Username</label>
-      <br/>
-      <input name="username" formControlName="username">
-    </div>
-    <div class="form-field">
-      <label>Password</label>
-      <br/>
-      <input name="password" formControlName="password" type="password">
-    </div>
-  </fieldset>
+  <h1>Join us!</h1>
+  <div class="form-field">
+    <label>Username</label>
+    <br/>
+    <input name="username" formControlName="username">
+  </div>
+  <div class="form-field">
+    <label>Password</label>
+    <br/>
+    <input name="password" formControlName="password" type="password">
+  </div>
   <div class="form-buttons">
     <button class="bttn-unite bttn-md bttn-primary" (click)="register()">Sign up</button>
-    <a>DAlready have an account? </a>
+    <a>Already have an account? </a>
     <a routerLink="/login">Log in</a>
   </div>
 </form>

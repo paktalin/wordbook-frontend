@@ -43,4 +43,8 @@ export class LoginFormComponent {
     }
   }
 
+  myFunction() {
+    document.getElementById('myDropdown').style.display = 'block';
+  }
+
 }
