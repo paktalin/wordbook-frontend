@@ -19,7 +19,7 @@ export class RegFormComponent {
               private alertService: AlertService) {
 
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -27,8 +27,8 @@ export class RegFormComponent {
   register() {
     const val = this.form.value;
 
-    if (val.email && val.password) {
-      this.authService.register(val.email, val.password)
+    if (val.username && val.password) {
+      this.authService.register(val.username, val.password)
         .subscribe(
           () => {
 

@@ -1,21 +1,19 @@
 <div>
-<a routerLink="/register">Register</a>
-<form [formGroup]="form">
-  <h1>Log in</h1>
-
+  <form [formGroup]="form">
+    <h1>Hi! Please, log in :)</h1>
     <div>
-      <label>Login</label>
+      <label>Username</label>
       <br>
-      <input name="email" formControlName="email">
+      <input name="username" formControlName="username">
     </div>
     <div>
       <label>Password</label>
       <br/>
-      <input name="password" formControlName="password"
-             type="password">
+      <input name="password" formControlName="password" type="password">
     </div>
 
-    <button class="bttn-unite bttn-md bttn-primary" (click)="login()">Login</button>
-
-</form>
+    <br/>
+    <button class="bttn-unite bttn-md bttn-primary" (click)="login()">Log in</button>
+    <a routerLink="/register">New here? Register</a>
+  </form>
 </div>

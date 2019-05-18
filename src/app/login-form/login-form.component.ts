@@ -19,7 +19,7 @@ export class LoginFormComponent {
               private alertService: AlertService) {
 
     this.form = this.fb.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -27,8 +27,8 @@ export class LoginFormComponent {
   login() {
     const val = this.form.value;
 
-    if (val.email && val.password) {
-      this.authService.login(val.email, val.password)
+    if (val.username && val.password) {
+      this.authService.login(val.username, val.password)
         .subscribe(
           () => {
             this.router.navigate( ['/words']);
