@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {WordRecord} from '../WordRecord';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {State} from '../State';
 
 // noinspection TsLint
 @Component({
@@ -41,16 +40,11 @@ export class WordlistComponent implements OnInit {
     const foreignWord = this.newWord.get('foreignControl').value;
     const translatedWord = this.newWord.get('translatedControl').value;
     if (event.key === 'Enter') {
-      const wordRecord = new WordRecord(foreignWord, translatedWord);
-      console.log(wordRecord);
-      this.wordList.unshift(wordRecord);
+      const editedWord = new WordRecord(foreignWord, translatedWord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post('api/save_word', wordRecord, this.httpOptions).subscribe(error => console.log(error));
+      this.http.post<WordRecord>('api/save_word', editedWord, this.httpOptions)
+        .subscribe(savedWord => { this.wordList.unshift(savedWord); }, error => console.log(error));
     }
   }
-
-
-
-
 }

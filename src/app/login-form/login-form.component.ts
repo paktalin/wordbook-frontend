@@ -30,10 +30,7 @@ export class LoginFormComponent {
     if (val.username && val.password) {
       this.authService.login(val.username, val.password)
         .subscribe(
-          result => {
-            console.log('response:');
-            console.log(result);
-            // TODO whatever we need to do with the response
+          () => {
             this.router.navigate( ['/words']);
           },
           error => {

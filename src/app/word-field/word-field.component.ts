@@ -31,12 +31,13 @@ export class WordFieldComponent implements OnInit {
     }
   }
 
-  saveChanges(wordRecord: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
-    wordRecord.foreignWord = foreignField.value;
-    wordRecord.translatedWord = translatedField.value;
+  saveChanges(word: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
+    word.foreignWord = foreignField.value;
+    word.translatedWord = translatedField.value;
+    console.log(word)
     console.log('The word id');
-    console.log(wordRecord.id);
-    this.http.put('api/update_word?word_id=' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
+    console.log(word.id);
+    this.http.put('api/update_word?word_id=' + word.id, word, this.httpOptions).subscribe(error => console.log(error));
     this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
   }
 
