@@ -1,18 +1,20 @@
-<a routerLink="/login">Login</a>
 <form [formGroup]="form">
   <fieldset>
-    <legend>Register</legend>
+    <legend>Join us!</legend>
     <div class="form-field">
-      <label>Username:</label>
+      <label>Username</label>
+      <br/>
       <input name="username" formControlName="username">
     </div>
     <div class="form-field">
-      <label>Password:</label>
-      <input name="password" formControlName="password"
-             type="password">
+      <label>Password</label>
+      <br/>
+      <input name="password" formControlName="password" type="password">
     </div>
   </fieldset>
   <div class="form-buttons">
-    <button class="bttn-unite bttn-md bttn-primary" (click)="register()">Register</button>
+    <button class="bttn-unite bttn-md bttn-primary" (click)="register()">Sign up</button>
+    <a>DAlready have an account? </a>
+    <a routerLink="/login">Log in</a>
   </div>
 </form>
