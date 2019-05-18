@@ -3,7 +3,7 @@ export class WordRecord {
     this.foreignWord = foreignWord;
     this.translatedWord = translatedWord;
     if (userId) { this.userId = userId;
-    } else { this.userId = 1; }
+    } else { this.userId = null; }
     if (wordId) { this.id = wordId;
     } else { this.id = null; }
   }

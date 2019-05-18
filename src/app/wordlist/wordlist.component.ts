@@ -40,10 +40,10 @@ export class WordlistComponent implements OnInit {
     const foreignWord = this.newWord.get('foreignControl').value;
     const translatedWord = this.newWord.get('translatedControl').value;
     if (event.key === 'Enter') {
-      const editedWord = new WordRecord(foreignWord, translatedWord);
+      const newWord = new WordRecord(foreignWord, translatedWord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post<WordRecord>('api/save_word', editedWord, this.httpOptions)
+      this.http.post<WordRecord>('api/save_word', newWord, this.httpOptions)
         .subscribe(savedWord => { this.wordList.unshift(savedWord); }, error => console.log(error));
     }
   }
