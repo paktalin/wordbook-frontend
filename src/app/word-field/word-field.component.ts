@@ -56,4 +56,8 @@ export class WordFieldComponent implements OnInit {
     this.state = State.None;
   }
 
+
+  openDropdownMenu() {
+    document.getElementById('myDropdown').style.display = 'block';
+  }
 }

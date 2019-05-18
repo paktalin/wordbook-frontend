@@ -30,21 +30,19 @@ export class LoginFormComponent {
     if (val.username && val.password) {
       this.authService.login(val.username, val.password)
         .subscribe(
-          () => {
+          result => {
+            console.log('response:');
+            console.log(result);
+            // TODO whatever we need to do with the response
             this.router.navigate( ['/words']);
           },
           error => {
             if (error.status === 400) {
-              console.log(error.error.message);
+              console.log(error.error);
               this.alertService.setMessage(error.error.message);
             }
           }
         );
     }
   }
-
-  myFunction() {
-    document.getElementById('myDropdown').style.display = 'block';
-  }
-
 }

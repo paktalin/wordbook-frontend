@@ -28,7 +28,7 @@ export class WordlistComponent implements OnInit {
   };
 
   public getList() {
-    return this.http.get<WordRecord[]>('/api/all_words').subscribe(wordsList => {
+    return this.http.get<WordRecord[]>('/api/words').subscribe(wordsList => {
       this.wordList = wordsList.reverse();
     });
   }

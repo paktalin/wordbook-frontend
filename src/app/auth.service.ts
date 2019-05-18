@@ -28,6 +28,7 @@ export class AuthService {
   }
 
   register(username: string, password: string) {
+    // TODO show alert message with an error
     return this.http.post<any>('/api/register', {username, password});
   }
 
