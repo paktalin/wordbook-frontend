@@ -1,13 +1,13 @@
 <div>
   <input #foreignField  type="text" disabled [value]="word.foreignWord" >
   <input #translatedField  type="text" disabled [value]="word.translatedWord">
-  <button #editBtn (click)="enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn)">Edit</button>
-  <button #saveBtn style="display: none;" [class]="Button" (click)="saveChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Save</button>
-  <button #discardBtn style="display: none;" (click)="discardChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Discard</button>
+  <button class="bttn-unite bttn-md bttn-primary" #editBtn (click)="enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn)">Edit</button>
+  <button class="bttn-unite bttn-md bttn-primary" #saveBtn style="display: none;" [class]="Button" (click)="saveChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Save</button>
+  <button class="bttn-unite bttn-md bttn-primary" #discardBtn style="display: none;" (click)="discardChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Discard</button>
 
   <div style="display: inline;">
-    <button #addTagBtn (click)="addTag(word, tagField)">Add tag</button>
-    <button #saveTagBtn (click)="saveTag(word, tagField, addTagBtn)">Add tag</button>
+    <button class="bttn-unite bttn-md bttn-primary" #addTagBtn (click)="addTag(word, tagField)">Add tag</button>
+    <button class="bttn-unite bttn-md bttn-primary" #saveTagBtn (click)="saveTag(word, tagField, addTagBtn)">Add tag</button>
     <input #tagField type="text" style="display: none;">
   </div>
 </div>

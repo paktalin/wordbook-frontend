@@ -11,6 +11,7 @@ import { RegFormComponent } from './reg-form/reg-form.component';
 import { AlertComponent } from './alert/alert.component';
 import { WordFieldComponent } from './word-field/word-field.component';
 import { SortingComponent } from './sorting/sorting.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SortingComponent } from './sorting/sorting.component';
     RegFormComponent,
     AlertComponent,
     WordFieldComponent,
-    SortingComponent
+    SortingComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
