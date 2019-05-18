@@ -34,7 +34,7 @@ export class WordFieldComponent implements OnInit {
   saveChanges(wordRecord: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
     wordRecord.foreignWord = foreignField.value;
     wordRecord.translatedWord = translatedField.value;
-    this.http.put('api/update_word/' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
+    this.http.put('api/update_word?word_id=' + wordRecord.id, wordRecord, this.httpOptions).subscribe(error => console.log(error));
     this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
   }
 
