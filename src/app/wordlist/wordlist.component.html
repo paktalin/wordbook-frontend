@@ -7,6 +7,4 @@
   </div>
 </form>
 
-<app-word-field *ngFor="let word of wordList" [word]="word">
-
-</app-word-field>
+<app-word-field *ngFor="let word of wordList" [word]="word" [wordListRef]="this"></app-word-field>

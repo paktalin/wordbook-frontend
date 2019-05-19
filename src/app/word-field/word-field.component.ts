@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {WordRecord} from '../WordRecord';
 import {State} from '../State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {WordlistComponent} from '../wordlist/wordlist.component';
 
 @Component({
   selector: 'app-word-field',
@@ -13,6 +14,7 @@ export class WordFieldComponent implements OnInit {
   }
 
   @Input() word: WordRecord;
+  @Input() wordListRef: WordlistComponent;
   private state: State = State.None;
   httpOptions = {
     headers: new HttpHeaders({
@@ -20,7 +22,7 @@ export class WordFieldComponent implements OnInit {
     })
   };
 
-  static closeDropdownMenu() {
+  closeDropdownMenu() {
     const dropdowns = document.getElementsByClassName('dropdown-content');
     let i;
     for (i = 0; i < dropdowns.length; i++) {
@@ -36,7 +38,7 @@ export class WordFieldComponent implements OnInit {
   enableEditing() {
     if (this.state === State.None) {
       this.state = State.Edit;
-      WordFieldComponent.closeDropdownMenu();
+      this.closeDropdownMenu();
       (document.getElementById('foreign-word') as HTMLInputElement).disabled = false;
       (document.getElementById('translated-word') as HTMLInputElement).disabled = false;
       document.getElementById('submit-block').style.display = 'block';
@@ -74,8 +76,8 @@ export class WordFieldComponent implements OnInit {
   }
 
   deleteWord() {
-    this.http.delete('delete_word&word_id=' + this.word.id).subscribe(() => {
-      // TODO delete from the wordList
+    this.http.delete('api/delete_word?word_id=' + this.word.id).subscribe(() => {
+      this.wordListRef.deleteWord(this.word);
     }, error => console.log(error));
   }
 }
