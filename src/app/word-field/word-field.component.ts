@@ -57,4 +57,8 @@ export class WordFieldComponent implements OnInit {
   openDropdownMenu() {
     document.getElementById('dropdown').classList.toggle("show");
   }
+
+  log() {
+    console.log('hi!');
+  }
 }
