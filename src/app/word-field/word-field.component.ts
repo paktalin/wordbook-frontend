@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Word} from '../Word';
 import {State} from '../State';
-import {Tag} from '../Tag';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordlistComponent} from '../wordlist/wordlist.component';
 

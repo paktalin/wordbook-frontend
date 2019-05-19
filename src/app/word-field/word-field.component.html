@@ -10,13 +10,8 @@
         <button (click)="deleteWord()">Delete</button>
         <div class="dropdown">
           <button (click)="addTag(tagsDropdown)">Add tag</button>
-
-          <app-tag *ngFor="let tag of getTags()" [tag]="tag"></app-tag>
-
           <div #tagsDropdown class="dropdown-content">
-            <button>Tag1</button>
-            <button>Tag2</button>
-            <button>Tag3</button>
+            <app-tag *ngFor="let tag of getTags()" [tag]="tag"></app-tag>
           </div>
         </div>
       </div>

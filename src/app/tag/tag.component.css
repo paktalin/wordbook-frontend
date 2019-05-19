@@ -1,0 +1,15 @@
+input {
+  border:none;
+  font: inherit;
+  cursor: pointer;
+  color: black;
+  padding: 12px 0;
+  text-decoration: none;
+  display: block;
+  background-color: transparent;
+  width:100%;
+  margin-left: auto;
+  border-radius:0;
+}
+
+input:hover {background-color: #ddd}
