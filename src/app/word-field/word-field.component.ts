@@ -9,6 +9,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   styleUrls: ['./word-field.component.css']
 })
 export class WordFieldComponent implements OnInit {
+  constructor(private http: HttpClient) {
+  }
+
   @Input() word: WordRecord;
   private state: State = State.None;
   httpOptions = {
@@ -16,11 +19,21 @@ export class WordFieldComponent implements OnInit {
       'Content-Type': 'application/json'
     })
   };
-  constructor(private http: HttpClient) { }
 
+  static closeDropdownMenu() {
+    const dropdowns = document.getElementsByClassName('dropdown-content');
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
   ngOnInit() {
   }
-  enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn) {
+
+  /*enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn) {
     if (this.state === State.None) {
       this.state = State.Edit;
       foreignField.disabled = false;
@@ -29,36 +42,45 @@ export class WordFieldComponent implements OnInit {
       saveBtn.style.display = 'inline';
       discardBtn.style.display = 'inline';
     }
+  }*/
+
+  enableEditing() {
+    if (this.state === State.None) {
+      this.state = State.Edit;
+      WordFieldComponent.closeDropdownMenu();
+      (document.getElementById('foreign-word') as HTMLInputElement).disabled = false;
+      (document.getElementById('translated-word') as HTMLInputElement).disabled = false;
+      document.getElementById('submit-block').style.display = 'block';
+    }
   }
 
-  saveChanges(word: WordRecord, foreignField, translatedField, editBtn, saveBtn, discardBtn) {
-    word.foreignWord = foreignField.value;
-    word.translatedWord = translatedField.value;
-    this.http.put('api/update_word', word, this.httpOptions).subscribe(error => console.log(error));
-    this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
-  }
-
-  discardChanges(wordRecord: WordRecord, foreignField: HTMLInputElement, translatedField: HTMLInputElement, editBtn, saveBtn, discardBtn) {
-    console.log(typeof foreignField);
-    foreignField.value = wordRecord.foreignWord;
-    translatedField.value = wordRecord.translatedWord;
-    this.finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn);
-  }
-
-  finishEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn) {
-    foreignField.disabled = true;
-    translatedField.disabled = true;
-    editBtn.style.display = 'inline';
-    saveBtn.style.display = 'none';
-    discardBtn.style.display = 'none';
+  finishEditing() {
+    (document.getElementById('foreign-word') as HTMLInputElement).disabled = true;
+    (document.getElementById('translated-word') as HTMLInputElement).disabled = true;
+    document.getElementById('submit-block').style.display = 'none';
     this.state = State.None;
   }
 
   openDropdownMenu() {
-    document.getElementById('dropdown').classList.toggle("show");
+    document.getElementById('dropdown').classList.toggle('show');
   }
 
   log() {
     console.log('hi!');
+  }
+
+  submitEdits() {
+    this.word.foreignWord = (document.getElementById('foreign-word') as HTMLInputElement).value;
+    this.word.translatedWord = (document.getElementById('translated-word') as HTMLInputElement).value;
+    this.http.put('api/update_word', this.word, this.httpOptions).subscribe(() => {
+    }, error => console.log(error));
+    this.finishEditing();
+  }
+
+  cancelEdits() {
+    console.log(this.word);
+    (document.getElementById('foreign-word') as HTMLInputElement).value = this.word.foreignWord;
+    (document.getElementById('translated-word') as HTMLInputElement).value = this.word.translatedWord;
+    this.finishEditing();
   }
 }
