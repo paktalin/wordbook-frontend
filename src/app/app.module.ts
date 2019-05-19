@@ -12,6 +12,7 @@ import { AlertComponent } from './alert/alert.component';
 import { WordFieldComponent } from './word-field/word-field.component';
 import { SortingComponent } from './sorting/sorting.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TagComponent } from './tag/tag.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AlertComponent,
     WordFieldComponent,
     SortingComponent,
-    NavbarComponent
+    NavbarComponent,
+    TagComponent
   ],
   imports: [
     BrowserModule,

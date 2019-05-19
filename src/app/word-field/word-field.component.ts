@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WordRecord} from '../WordRecord';
+import {Word} from '../Word';
 import {State} from '../State';
+import {Tag} from '../Tag';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordlistComponent} from '../wordlist/wordlist.component';
 
@@ -12,8 +13,7 @@ import {WordlistComponent} from '../wordlist/wordlist.component';
 export class WordFieldComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
-
-  @Input() word: WordRecord;
+  @Input() word: Word;
   @Input() wordListRef: WordlistComponent;
   private state: State = State.None;
   httpOptions = {
@@ -52,12 +52,8 @@ export class WordFieldComponent implements OnInit {
     this.state = State.None;
   }
 
-  openDropdownMenu(dropdown: HTMLDivElement) {
-    dropdown.classList.toggle('show');
-  }
-
-  log() {
-    console.log('hi!');
+  openDropdownMenu(menuDropdown: HTMLDivElement) {
+    menuDropdown.classList.toggle('show');
   }
 
   submitEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
@@ -78,5 +74,13 @@ export class WordFieldComponent implements OnInit {
     this.http.delete('api/delete_word?word_id=' + this.word.id).subscribe(() => {
       this.wordListRef.deleteWord(this.word);
     }, error => console.log(error));
+  }
+
+  addTag(tagsDropdown: HTMLDivElement) {
+    tagsDropdown.classList.toggle('show');
+  }
+
+  getTags() {
+    return this.wordListRef.getTags();
   }
 }

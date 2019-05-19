@@ -1,4 +1,4 @@
-export class WordRecord {
+export class Word {
   constructor(foreignWord: string, translatedWord: string, userId?: number, wordId?: number) {
     this.foreignWord = foreignWord;
     this.translatedWord = translatedWord;

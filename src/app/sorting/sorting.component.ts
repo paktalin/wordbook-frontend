@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WordRecord} from '../WordRecord';
+import {Word} from '../Word';
 
 @Component({
   selector: 'app-sorting',
@@ -7,7 +7,7 @@ import {WordRecord} from '../WordRecord';
   styleUrls: ['./sorting.component.css']
 })
 export class SortingComponent implements OnInit {
-  @Input() wordList: WordRecord[];
+  @Input() wordList: Word[];
   isCollapsed: boolean;
 
   constructor() { }
@@ -30,7 +30,7 @@ export class SortingComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  addTag(word: WordRecord, tagField: HTMLInputElement, addTagBtn: HTMLButtonElement) {
+  addTag(word: Word, tagField: HTMLInputElement, addTagBtn: HTMLButtonElement) {
     tagField.style.display = 'inline';
     addTagBtn.innerHTML = 'Save tag';
   }
