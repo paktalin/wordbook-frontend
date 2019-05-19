@@ -1,29 +1,18 @@
 <div>
-  <input id="foreign-word" #foreignField  type="text" disabled [value]="word.foreignWord" >
-  <input id="translated-word" #translatedField  type="text" disabled [value]="word.translatedWord">
+  <input id="foreign-word" type="text" disabled [value]="word.foreignWord" >
+  <input id="translated-word" type="text" disabled [value]="word.translatedWord">
 
   <div class="dropdown">
     <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu()">#</button>
     <div id="dropdown" class="dropdown-content">
       <button (click)="enableEditing()">Edit</button>
-      <button (click)="log()">Delete</button>
+      <button (click)="deleteWord()">Delete</button>
       <button (click)="log()">Add tag</button>
     </div>
   </div>
-
 
   <div id ="submit-block" class="submit-block">
     <button class="bttn-unite bttn-md bttn-primary" (click)="submitEdits()">Submit</button>
     <button class="bttn-unite bttn-md bttn-primary" (click)="cancelEdits()">Cancel</button>
   </div>
-
-  <!--<button class="bttn-unite bttn-md bttn-primary" #editBtn (click)="enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn)">Edit</button>
-  <button class="bttn-unite bttn-md bttn-primary" #saveBtn style="display: none;" [class]="Button" (click)="saveChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Save</button>
-  <button class="bttn-unite bttn-md bttn-primary" #discardBtn style="display: none;" (click)="discardChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Discard</button>
-
-  <div style="display: inline;">
-    <button class="bttn-unite bttn-md bttn-primary" #addTagBtn (click)="addTag(word, tagField)">Add tag</button>
-    <button class="bttn-unite bttn-md bttn-primary" #saveTagBtn (click)="saveTag(word, tagField, addTagBtn)">Add tag</button>
-    <input #tagField type="text" style="display: none;">
-  </div>-->
 </div>

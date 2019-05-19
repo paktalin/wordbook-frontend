@@ -33,17 +33,6 @@ export class WordFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  /*enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn) {
-    if (this.state === State.None) {
-      this.state = State.Edit;
-      foreignField.disabled = false;
-      translatedField.disabled = false;
-      editBtn.style.display = 'none';
-      saveBtn.style.display = 'inline';
-      discardBtn.style.display = 'inline';
-    }
-  }*/
-
   enableEditing() {
     if (this.state === State.None) {
       this.state = State.Edit;
@@ -82,5 +71,11 @@ export class WordFieldComponent implements OnInit {
     (document.getElementById('foreign-word') as HTMLInputElement).value = this.word.foreignWord;
     (document.getElementById('translated-word') as HTMLInputElement).value = this.word.translatedWord;
     this.finishEditing();
+  }
+
+  deleteWord() {
+    this.http.delete('delete_word&word_id=' + this.word.id).subscribe(() => {
+      // TODO delete from the wordList
+    }, error => console.log(error));
   }
 }

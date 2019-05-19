@@ -47,4 +47,8 @@ export class WordlistComponent implements OnInit {
         .subscribe(savedWord => { this.wordList.unshift(savedWord); }, error => console.log(error));
     }
   }
+
+  deleteWord(word: WordRecord) {
+    this.wordList.splice(this.wordList.indexOf(word), 1);
+  }
 }
