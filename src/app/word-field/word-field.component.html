@@ -1,6 +1,16 @@
 <div>
   <input #foreignField  type="text" disabled [value]="word.foreignWord" >
   <input #translatedField  type="text" disabled [value]="word.translatedWord">
+
+  <div class="dropdown">
+    <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu()">#</button>
+    <div id="dropdown" class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div>
+
   <button class="bttn-unite bttn-md bttn-primary" #editBtn (click)="enableEditing(foreignField, translatedField, editBtn, saveBtn, discardBtn)">Edit</button>
   <button class="bttn-unite bttn-md bttn-primary" #saveBtn style="display: none;" [class]="Button" (click)="saveChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Save</button>
   <button class="bttn-unite bttn-md bttn-primary" #discardBtn style="display: none;" (click)="discardChanges(word, foreignField, translatedField, editBtn, saveBtn, discardBtn)">Discard</button>
