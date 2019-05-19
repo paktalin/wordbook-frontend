@@ -9,8 +9,7 @@ import {AlertService} from '../alert.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent {
-
+export class LoginFormComponent implements OnInit {
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -22,6 +21,9 @@ export class LoginFormComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+  ngOnInit() {
+    this.authService.logout();
   }
 
   login() {

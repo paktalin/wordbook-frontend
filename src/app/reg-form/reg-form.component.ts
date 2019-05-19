@@ -9,10 +9,9 @@ import {AlertService} from '../alert.service';
   templateUrl: './reg-form.component.html',
   styleUrls: ['./reg-form.component.css']
 })
-export class RegFormComponent {
+export class RegFormComponent implements OnInit {
 
   form: FormGroup;
-
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private router: Router,
@@ -22,6 +21,9 @@ export class RegFormComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+  ngOnInit() {
+    this.authService.logout();
   }
 
   register() {

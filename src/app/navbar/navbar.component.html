@@ -1,1 +1,10 @@
 <!--<a routerLink="/">{{}}</a>-->
+<div>
+<img src="../../assets/images/cbpve-8oncm.svg">
+<span>
+  <a *ngIf="isAuthenticated()" routerLink="/login" (click)="logout()">Log out</a>
+  <a *ngIf="!isAuthenticated() && isLoginPage()" routerLink="/register">Register</a>
+  <a *ngIf="!isAuthenticated() && !isLoginPage()" routerLink="/login">Log in</a>
+</span>
+
+</div>
