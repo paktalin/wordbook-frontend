@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #1d89ff;
+  /*background-color: #1d89ff;*/
   font-family: 'Oswald', sans-serif;
 }
 
@@ -340,4 +340,15 @@ button, input{
 input {
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.word-form {
+  text-align: center;
+  background-color: #EEF8FE;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.word-input-field {
+  width: 200px;
 }

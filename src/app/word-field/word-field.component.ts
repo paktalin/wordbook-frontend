@@ -35,44 +35,43 @@ export class WordFieldComponent implements OnInit {
   ngOnInit() {
   }
 
-  enableEditing() {
+  enableEditing(foreignWord: HTMLInputElement, translatedWord: HTMLInputElement, submitBlock: HTMLDivElement) {
     if (this.state === State.None) {
       this.state = State.Edit;
       this.closeDropdownMenu();
-      (document.getElementById('foreign-word') as HTMLInputElement).disabled = false;
-      (document.getElementById('translated-word') as HTMLInputElement).disabled = false;
-      document.getElementById('submit-block').style.display = 'block';
+      foreignWord.disabled = false;
+      translatedWord.disabled = false;
+      submitBlock.style.display = 'block';
     }
   }
 
-  finishEditing() {
-    (document.getElementById('foreign-word') as HTMLInputElement).disabled = true;
-    (document.getElementById('translated-word') as HTMLInputElement).disabled = true;
-    document.getElementById('submit-block').style.display = 'none';
+  finishEditing(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
+    foreignField.disabled = true;
+    translatedField.disabled = true;
+    submitBlock.style.display = 'none';
     this.state = State.None;
   }
 
-  openDropdownMenu() {
-    document.getElementById('dropdown').classList.toggle('show');
+  openDropdownMenu(dropdown: HTMLDivElement) {
+    dropdown.classList.toggle('show');
   }
 
   log() {
     console.log('hi!');
   }
 
-  submitEdits() {
-    this.word.foreignWord = (document.getElementById('foreign-word') as HTMLInputElement).value;
-    this.word.translatedWord = (document.getElementById('translated-word') as HTMLInputElement).value;
+  submitEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
+    this.word.foreignWord = foreignField.value;
+    this.word.translatedWord = translatedField.value;
     this.http.put('api/update_word', this.word, this.httpOptions).subscribe(() => {
     }, error => console.log(error));
-    this.finishEditing();
+    this.finishEditing(foreignField, translatedField, submitBlock);
   }
 
-  cancelEdits() {
-    console.log(this.word);
-    (document.getElementById('foreign-word') as HTMLInputElement).value = this.word.foreignWord;
-    (document.getElementById('translated-word') as HTMLInputElement).value = this.word.translatedWord;
-    this.finishEditing();
+  cancelEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
+    foreignField.value = this.word.foreignWord;
+    translatedField.value = this.word.translatedWord;
+    this.finishEditing(foreignField, translatedField, submitBlock);
   }
 
   deleteWord() {

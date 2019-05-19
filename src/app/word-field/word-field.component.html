@@ -1,18 +1,20 @@
 <div>
-  <input id="foreign-word" type="text" disabled [value]="word.foreignWord" >
-  <input id="translated-word" type="text" disabled [value]="word.translatedWord">
+  <div class="word-form">
+    <input #foreignWord class="word-input-field" type="text" disabled [value]="word.foreignWord">
+    <input #translatedWord class="word-input-field" type="text" disabled [value]="word.translatedWord">
 
-  <div class="dropdown">
-    <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu()">#</button>
-    <div id="dropdown" class="dropdown-content">
-      <button (click)="enableEditing()">Edit</button>
-      <button (click)="deleteWord()">Delete</button>
-      <button (click)="log()">Add tag</button>
+    <div class="dropdown">
+      <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu(dropdown)">#</button>
+      <div #dropdown class="dropdown-content">
+        <button (click)="enableEditing(foreignWord, translatedWord, submitBlock)">Edit</button>
+        <button (click)="deleteWord()">Delete</button>
+        <button (click)="log()">Add tag</button>
+      </div>
     </div>
   </div>
 
-  <div id ="submit-block" class="submit-block">
-    <button class="bttn-unite bttn-md bttn-primary" (click)="submitEdits()">Submit</button>
-    <button class="bttn-unite bttn-md bttn-primary" (click)="cancelEdits()">Cancel</button>
+  <div #submitBlock class="submit-block">
+    <button class="bttn-unite bttn-md bttn-primary" (click)="submitEdits(foreignWord, translatedWord, submitBlock)">Submit</button>
+    <button class="bttn-unite bttn-md bttn-primary" (click)="cancelEdits(foreignWord, translatedWord, submitBlock)">Cancel</button>
   </div>
 </div>

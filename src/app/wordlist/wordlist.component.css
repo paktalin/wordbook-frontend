@@ -1,9 +1,9 @@
-app-word-field, form {
-  text-align: center;
+.word-form {
+  padding-top: 10px;
 }
 
 input {
-  line-height: 40px;
+  line-height: 30px;
 }
 app-sorting{
 
