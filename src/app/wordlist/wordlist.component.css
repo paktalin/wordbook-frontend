@@ -9,7 +9,8 @@ app-sorting{
 }
 
 .tags {
-  width: 200px;
+  display: inline;
+  width: 220px;
   float: right;
   background-color: #EEF8FE;
   margin: 10px;

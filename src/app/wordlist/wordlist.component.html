@@ -12,4 +12,6 @@
 <div class="tags">
   <h1>Your tags</h1>
   <app-tags-list *ngFor="let tag of tags" [tag]="tag"></app-tags-list>
+  <input #newTag class="new-tag-field" type="text" placeholder="new tag">
+  <button class="bttn-unite bttn-md bttn-primary" (click)="addTag(newTag)">✔</button>
 </div>

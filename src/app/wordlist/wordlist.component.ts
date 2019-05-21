@@ -82,4 +82,17 @@ export class WordlistComponent implements OnInit {
   getTags() {
     return this.tags;
   }
+
+  addTag(tagName: HTMLInputElement) {
+    const newTag: Tag = new Tag(tagName.value);
+    this.http.post<any>('api/save_tag', newTag, this.httpOptions)
+      .subscribe(result => {
+        this.tags.unshift(result.tag);
+        this.alertService.success(result.message);
+      }, error => {
+        console.log(error.error);
+        this.alertService.error(error.error.message);
+      });
+    tagName.value = '';
+  }
 }
