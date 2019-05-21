@@ -3,6 +3,8 @@ import {Word} from '../Word';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Tag} from '../Tag';
+import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 // noinspection TsLint
 @Component({
@@ -12,7 +14,10 @@ import {Tag} from '../Tag';
 })
 export class WordlistComponent implements OnInit {
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {
+  constructor(private http: HttpClient,
+              private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private router: Router) {
     this.newWord = formBuilder.group({
       foreignControl: new FormControl(),
       translatedControl: new FormControl()
@@ -29,9 +34,16 @@ export class WordlistComponent implements OnInit {
   };
 
   private queryWordList() {
+    console.log(localStorage.getItem('access_token') + '  wordlist');
     return this.http.get<Word[]>('/api/words').subscribe(wordsList => {
       this.wordList = wordsList.reverse();
-    }, error => console.log(error));
+      console.log(localStorage.getItem('access_token') + '  wordlist');
+    }, error => {
+      if (error.status === 400) {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
   private queryTags() {

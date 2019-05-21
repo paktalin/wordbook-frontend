@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Word} from '../Word';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-sorting',
@@ -10,9 +11,10 @@ export class SortingComponent implements OnInit {
   @Input() wordList: Word[];
   isCollapsed: boolean;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.logout();
   }
   sortByDate() {
     this.wordList.sort((w1, w2) => w2.id - w1.id);

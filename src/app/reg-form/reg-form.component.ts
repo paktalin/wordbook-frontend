@@ -2,7 +2,7 @@ import { Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
-import {AlertService} from '../alert.service';
+import {AlertService} from '../alert/alert.service';
 
 @Component({
   selector: 'app-reg-form',
@@ -36,7 +36,7 @@ export class RegFormComponent {
           },
           error => {
             if (error.status === 400) {
-              this.alertService.setMessage(error.error.message);
+              this.alertService.error(error.error.message);
             }
           }
         );

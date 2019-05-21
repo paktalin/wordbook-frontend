@@ -8,11 +8,11 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RegFormComponent } from './reg-form/reg-form.component';
-import { AlertComponent } from './alert/alert.component';
 import { WordFieldComponent } from './word-field/word-field.component';
 import { SortingComponent } from './sorting/sorting.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TagComponent } from './tag/tag.component';
+import {AlertComponent} from './alert/alert.component';
 
 @NgModule({
   declarations: [

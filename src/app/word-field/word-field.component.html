@@ -4,7 +4,7 @@
     <input #translatedWord class="word-input-field" type="text" disabled [value]="word.translatedWord">
 
     <div class="dropdown">
-      <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu(menuDropdown)">#</button>
+      <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu(menuDropdown)">⋮</button>
       <div #menuDropdown class="dropdown-content">
         <button (click)="enableEditing(foreignWord, translatedWord, submitBlock)">Edit</button>
         <button (click)="deleteWord()">Delete</button>
