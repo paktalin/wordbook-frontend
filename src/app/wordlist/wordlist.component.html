@@ -8,3 +8,8 @@
 </form>
 
 <app-word-field *ngFor="let word of wordList" [word]="word" [wordListRef]="this"></app-word-field>
+
+<div class="tags">
+  <h1>Your tags</h1>
+  <app-tags-list *ngFor="let tag of tags" [tag]="tag"></app-tags-list>
+</div>

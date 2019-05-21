@@ -13,6 +13,7 @@ import { SortingComponent } from './sorting/sorting.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TagComponent } from './tag/tag.component';
 import {AlertComponent} from './alert/alert.component';
+import { TagsListComponent } from './tags-list/tags-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {AlertComponent} from './alert/alert.component';
     WordFieldComponent,
     SortingComponent,
     NavbarComponent,
-    TagComponent
+    TagComponent,
+    TagsListComponent
   ],
   imports: [
     BrowserModule,

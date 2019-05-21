@@ -6,6 +6,11 @@ input {
   line-height: 30px;
 }
 app-sorting{
+}
 
-
+.tags {
+  width: 200px;
+  float: right;
+  background-color: #EEF8FE;
+  margin: 10px;
 }
