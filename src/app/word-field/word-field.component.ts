@@ -3,6 +3,7 @@ import {Word} from '../Word';
 import {State} from '../State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordlistComponent} from '../wordlist/wordlist.component';
+import {AlertService} from "../alert/alert.service";
 
 @Component({
   selector: 'app-word-field',
@@ -10,7 +11,8 @@ import {WordlistComponent} from '../wordlist/wordlist.component';
   styleUrls: ['./word-field.component.css']
 })
 export class WordFieldComponent implements OnInit {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private alertService: AlertService) {
   }
   @Input() word: Word;
   @Input() wordListRef: WordlistComponent;
@@ -58,8 +60,11 @@ export class WordFieldComponent implements OnInit {
   submitEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
     this.word.foreignWord = foreignField.value;
     this.word.translatedWord = translatedField.value;
-    this.http.put('api/update_word', this.word, this.httpOptions).subscribe(() => {
-    }, error => console.log(error));
+    this.http.put<any>('api/update_word', this.word, this.httpOptions).subscribe(result => {
+      this.alertService.success(result.message);
+    }, error => {
+      this.alertService.error(error.error.message);
+    });
     this.finishEditing(foreignField, translatedField, submitBlock);
   }
 
@@ -70,9 +75,12 @@ export class WordFieldComponent implements OnInit {
   }
 
   deleteWord() {
-    this.http.delete('api/delete_word?word_id=' + this.word.id).subscribe(() => {
+    this.http.delete<any>('api/delete_word?word_id=' + this.word.id).subscribe(result => {
+      this.alertService.success(result.message);
       this.wordListRef.deleteWord(this.word);
-    }, error => console.log(error));
+    }, error => {
+      this.alertService.error(error.error.message);
+    });
   }
 
   addTag(tagsDropdown: HTMLDivElement) {

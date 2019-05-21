@@ -1,0 +1,14 @@
+.alert{
+  border-radius: 5%;
+  color: white;
+  padding: 9px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.alert-success {
+  background-color: #28b78d;
+}
+.alert-danger {
+  background-color: #ff1424;
+}

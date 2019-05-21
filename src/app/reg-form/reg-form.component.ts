@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {AlertService} from '../alert/alert.service';
@@ -19,8 +19,11 @@ export class RegFormComponent {
               private alertService: AlertService) {
 
     this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+      ])
     });
   }
 

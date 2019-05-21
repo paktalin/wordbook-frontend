@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Tag} from '../Tag';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {AlertService} from "../alert/alert.service";
 
 // noinspection TsLint
 @Component({
@@ -17,7 +18,8 @@ export class WordlistComponent implements OnInit {
   constructor(private http: HttpClient,
               private formBuilder: FormBuilder,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
     this.newWord = formBuilder.group({
       foreignControl: new FormControl(),
       translatedControl: new FormControl()
@@ -37,7 +39,6 @@ export class WordlistComponent implements OnInit {
     console.log(localStorage.getItem('access_token') + '  wordlist');
     return this.http.get<Word[]>('/api/words').subscribe(wordsList => {
       this.wordList = wordsList.reverse();
-      console.log(localStorage.getItem('access_token') + '  wordlist');
     }, error => {
       if (error.status === 400) {
         this.authService.logout();
@@ -64,8 +65,14 @@ export class WordlistComponent implements OnInit {
       const newWord = new Word(foreignWord, translatedWord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post<Word>('api/save_word', newWord, this.httpOptions)
-        .subscribe(savedWord => { this.wordList.unshift(savedWord); }, error => console.log(error));
+      this.http.post<any>('api/save_word', newWord, this.httpOptions)
+        .subscribe(result => {
+          this.wordList.unshift(result.word);
+          this.alertService.success(result.message);
+        }, error => {
+          console.log(error.error);
+          this.alertService.error(error.error.message);
+        });
     }
   }
 

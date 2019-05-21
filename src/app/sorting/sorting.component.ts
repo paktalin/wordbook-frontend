@@ -7,15 +7,9 @@ import {AuthService} from "../auth.service";
   templateUrl: './sorting.component.html',
   styleUrls: ['./sorting.component.css']
 })
-export class SortingComponent implements OnInit {
+export class SortingComponent {
   @Input() wordList: Word[];
   isCollapsed: boolean;
-
-  constructor(private authService: AuthService) { }
-
-  ngOnInit() {
-    this.authService.logout();
-  }
   sortByDate() {
     this.wordList.sort((w1, w2) => w2.id - w1.id);
   }

@@ -34,8 +34,6 @@ export class LoginFormComponent implements OnInit {
       this.authService.login(val.username, val.password)
         .subscribe(
           result => {
-            console.log('response:' + result);
-            console.log(localStorage.getItem('access_token'));
             // TODO whatever we need to do with the response
             this.router.navigate( ['/words']);
             this.alertService.success('Welcome back ' + val.username);
