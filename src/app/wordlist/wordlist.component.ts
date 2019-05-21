@@ -36,9 +36,8 @@ export class WordlistComponent implements OnInit {
   };
 
   private queryWordList() {
-    console.log(localStorage.getItem('access_token') + '  wordlist');
-    return this.http.get<Word[]>('/api/words').subscribe(wordsList => {
-      this.wordList = wordsList.reverse();
+    return this.http.get<any>('/api/words').subscribe(result => {
+      this.wordList = result.wordList.reverse();
     }, error => {
       if (error.status === 400) {
         this.authService.logout();
