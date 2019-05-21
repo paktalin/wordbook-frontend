@@ -3,7 +3,7 @@ import {Word} from '../Word';
 import {State} from '../State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordlistComponent} from '../wordlist/wordlist.component';
-import {AlertService} from "../alert/alert.service";
+import {AlertService} from '../alert/alert.service';
 
 @Component({
   selector: 'app-word-field',

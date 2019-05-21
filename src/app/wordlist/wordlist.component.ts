@@ -5,7 +5,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Tag} from '../Tag';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
-import {AlertService} from "../alert/alert.service";
+import {AlertService} from '../alert/alert.service';
 
 // noinspection TsLint
 @Component({

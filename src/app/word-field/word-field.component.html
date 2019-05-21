@@ -11,7 +11,7 @@
         <div class="dropdown">
           <button (click)="addTag(tagsDropdown)">Add tag</button>
           <div #tagsDropdown class="dropdown-content">
-            <app-tag *ngFor="let tag of getTags()" [tag]="tag"></app-tag>
+            <app-tag *ngFor="let tag of getTags()" [tag]="tag" [word]="word"></app-tag>
           </div>
         </div>
       </div>
