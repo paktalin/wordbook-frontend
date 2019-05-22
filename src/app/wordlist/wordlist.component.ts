@@ -6,6 +6,7 @@ import {Tag} from '../Tag';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {AlertService} from '../alert/alert.service';
+import {UserResponse} from '../UserResponse';
 
 // noinspection TsLint
 @Component({
@@ -36,20 +37,17 @@ export class WordlistComponent implements OnInit {
   };
 
   private queryWordList() {
-    return this.http.get<any>('/api/words').subscribe(result => {
+    return this.http.get<UserResponse>('/api/words').subscribe(result => {
       this.wordList = result.wordList.reverse();
-    }, error => {
-      if (error.status === 400) {
-        this.authService.logout();
-        this.router.navigate(['/login']);
-      }
-    });
+    }, error => this.authService.coordinateError(error)
+    );
   }
 
   private queryTags() {
-    return this.http.get<Tag[]>('/api/tags').subscribe(tags => {
-      this.tags = tags;
-    }, error => console.log(error));
+    return this.http.get<UserResponse>('/api/tags').subscribe(result => {
+        this.tags = result.tagList;
+    }, error => this.authService.coordinateError(error)
+    );
   }
 
   ngOnInit() {
@@ -64,14 +62,12 @@ export class WordlistComponent implements OnInit {
       const newWord = new Word(foreignWord, translatedWord);
       this.newWord.controls.foreignControl.setValue('');
       this.newWord.controls.translatedControl.setValue('');
-      this.http.post<any>('api/save_word', newWord, this.httpOptions)
+      this.http.post<UserResponse>('api/save_word', newWord, this.httpOptions)
         .subscribe(result => {
           this.wordList.unshift(result.word);
           this.alertService.success(result.message);
-        }, error => {
-          console.log(error.error);
-          this.alertService.error(error.error.message);
-        });
+        }, error => this.authService.coordinateError(error)
+        );
     }
   }
 
@@ -85,14 +81,12 @@ export class WordlistComponent implements OnInit {
 
   addTag(tagName: HTMLInputElement) {
     const newTag: Tag = new Tag(tagName.value);
-    this.http.post<any>('api/save_tag', newTag, this.httpOptions)
+    this.http.post<UserResponse>('api/save_tag', newTag, this.httpOptions)
       .subscribe(result => {
         this.tags.unshift(result.tag);
         this.alertService.success(result.message);
-      }, error => {
-        console.log(error.error);
-        this.alertService.error(error.error.message);
-      });
+      }, error => this.authService.coordinateError(error)
+      );
     tagName.value = '';
   }
 }

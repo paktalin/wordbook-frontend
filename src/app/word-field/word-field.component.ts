@@ -4,6 +4,8 @@ import {State} from '../State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {WordlistComponent} from '../wordlist/wordlist.component';
 import {AlertService} from '../alert/alert.service';
+import {AuthService} from '../auth.service';
+import {UserResponse} from '../UserResponse';
 
 @Component({
   selector: 'app-word-field',
@@ -12,7 +14,8 @@ import {AlertService} from '../alert/alert.service';
 })
 export class WordFieldComponent implements OnInit {
   constructor(private http: HttpClient,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private authService: AuthService) {
   }
   @Input() word: Word;
   @Input() wordListRef: WordlistComponent;
@@ -60,11 +63,10 @@ export class WordFieldComponent implements OnInit {
   submitEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
     this.word.foreignWord = foreignField.value;
     this.word.translatedWord = translatedField.value;
-    this.http.put<any>('api/update_word', this.word, this.httpOptions).subscribe(result => {
+    this.http.put<UserResponse>('api/update_word', this.word, this.httpOptions).subscribe(result => {
       this.alertService.success(result.message);
-    }, error => {
-      this.alertService.error(error.error.message);
-    });
+    }, error => this.authService.coordinateError(error)
+    );
     this.finishEditing(foreignField, translatedField, submitBlock);
   }
 
@@ -75,12 +77,10 @@ export class WordFieldComponent implements OnInit {
   }
 
   deleteWord() {
-    this.http.delete<any>('api/delete_word?word_id=' + this.word.id).subscribe(result => {
+    this.http.delete<UserResponse>('api/delete_word?word_id=' + this.word.id).subscribe(result => {
       this.alertService.success(result.message);
       this.wordListRef.deleteWord(this.word);
-    }, error => {
-      this.alertService.error(error.error.message);
-    });
+    }, error => this.authService.coordinateError(error));
   }
 
   addTag(tagsDropdown: HTMLDivElement) {

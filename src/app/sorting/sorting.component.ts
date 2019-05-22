@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Word} from '../Word';
-import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-sorting',

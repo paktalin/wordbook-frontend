@@ -37,11 +37,7 @@ export class RegFormComponent {
 
             this.router.navigate( ['/login']);
           },
-          error => {
-            if (error.status === 400) {
-              this.alertService.error(error.error.message);
-            }
-          }
+          error => this.authService.coordinateError(error)
         );
     }
   }

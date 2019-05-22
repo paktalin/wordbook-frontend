@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TagComponent } from './tag/tag.component';
 import {AlertComponent} from './alert/alert.component';
 import { TagsListComponent } from './tags-list/tags-list.component';
+import {SearchBarComponent} from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TagsListComponent } from './tags-list/tags-list.component';
     SortingComponent,
     NavbarComponent,
     TagComponent,
-    TagsListComponent
+    TagsListComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

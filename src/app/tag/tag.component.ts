@@ -3,6 +3,8 @@ import {Tag} from '../Tag';
 import {Word} from '../Word';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AlertService} from '../alert/alert.service';
+import {AuthService} from '../auth.service';
+import {UserResponse} from '../UserResponse';
 
 @Component({
   selector: 'app-tag',
@@ -12,7 +14,8 @@ import {AlertService} from '../alert/alert.service';
 export class TagComponent implements OnInit {
 
   constructor(private http: HttpClient,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private authService: AuthService) {
   }
   @Input() tag: Tag;
   @Input() word: Word;
@@ -26,10 +29,9 @@ export class TagComponent implements OnInit {
   }
 
   addTag() {
-    this.http.put<any>('api/add_tag?tag_id=' + this.tag.id, this.word, this.httpOptions).subscribe(result => {
+    this.http.put<UserResponse>('api/add_tag?tag_id=' + this.tag.id, this.word, this.httpOptions).subscribe(result => {
       this.alertService.success(result.message);
-    }, error => {
-      this.alertService.error(error.error.message);
-    });
+    }, error => this.authService.coordinateError(error)
+    );
   }
 }

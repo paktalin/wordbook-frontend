@@ -38,15 +38,7 @@ export class LoginFormComponent implements OnInit {
             this.router.navigate( ['/words']);
             this.alertService.success('Welcome back ' + val.username);
           },
-          error => {
-            if (error.status === 400) {
-              console.log(error.error);
-              this.alertService.error(error.error.message);
-            }
-            if (error.status === 504) {
-               this.alertService.error('Service not respond');
-            }
-          }
+          error => this.authService.coordinateError(error)
         );
     }
   }

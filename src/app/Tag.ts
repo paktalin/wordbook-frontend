@@ -11,8 +11,8 @@ export class Tag {
     this.words = (words === undefined) ? null : words;
   }
 
-  public name: string;
   public id?: number;
+  public name: string;
   public description?: string;
   public color?: string;
   public user?: User;

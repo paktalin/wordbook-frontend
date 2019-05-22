@@ -3,6 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {User} from './User';
+import {AlertService} from './alert/alert.service';
+import {Router} from '@angular/router';
+import {UserResponse} from './UserResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,9 @@ import {User} from './User';
 export class AuthService {
 
   constructor(private http: HttpClient,
-              public jwtHelper: JwtHelperService) {
+              private jwtHelper: JwtHelperService,
+              private alertService: AlertService,
+              private router: Router) {
   }
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('access_token');
@@ -19,9 +24,8 @@ export class AuthService {
 
   login(username: string, password: string) {
     const user = new User(username, password);
-    return this.http.post<any>('/api/login', user)
+    return this.http.post<UserResponse>('/api/login', user)
       .pipe(map(result => {
-        console.log(result.token);
         if (result && result.token) {
           localStorage.setItem('access_token', result.token);
         }
@@ -29,11 +33,23 @@ export class AuthService {
   }
 
   register(username: string, password: string) {
-    // TODO show alert message with an error
-    return this.http.post<any>('/api/register', {username, password});
+    return this.http.post<UserResponse>('/api/register', {username, password});
   }
 
   logout() {
     localStorage.removeItem('access_token');
+  }
+
+  coordinateError(error ) {
+    if (error.status === 400) {
+      this.logout();
+      this.router.navigate(['/login']);
+      this.alertService.error(error.error.message);
+    }
+    if (error.status === 500) {
+      this.logout();
+      this.router.navigate(['/login']);
+      this.alertService.error('Service internal error, try again later');
+    }
   }
 }
