@@ -1,0 +1,25 @@
+/*
+input{
+  background: url("../../../../assets/images/search.png") no-repeat scroll right;
+}
+*/
+input {
+  margin-right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-right: none;
+  padding-bottom: 4.3px;
+  padding-top: 6.5px;
+}
+i {
+  border: solid black 1px;
+  margin-left: 0;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 5px;
+}
+.icon {
+  color: white;
+  background-color: #1d89ff;
+  text-align: center;
+}

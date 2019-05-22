@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {AlertService} from '../alert/alert.service';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-reg-form',

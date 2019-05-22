@@ -1,0 +1,9 @@
+<!--<a routerLink="/">{{}}</a>-->
+<div>
+  <span>
+  <a *ngIf="isAuthenticated()" routerLink="/login" (click)="logout()">Log out</a>
+  <a *ngIf="!isAuthenticated() && isLoginPage()" routerLink="/register">Sign up</a>
+  <a *ngIf="!isAuthenticated() && !isLoginPage()" routerLink="/login">Sign in</a>
+</span>
+
+</div>

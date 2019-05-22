@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Tag} from '../Tag';
+import {Tag} from '../../DTO/Tag';
 
 @Component({
   selector: 'app-tags-list',

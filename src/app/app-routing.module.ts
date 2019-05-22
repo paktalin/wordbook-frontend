@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {WordlistComponent} from './wordlist/wordlist.component';
-import {LoginFormComponent} from './login-form/login-form.component';
-import {RegFormComponent} from './reg-form/reg-form.component';
-import {ActivationService} from './activation.service';
+import {WordlistComponent} from './components/wordlist/wordlist.component';
+import {LoginFormComponent} from './components/login-form/login-form.component';
+import {RegFormComponent} from './components/reg-form/reg-form.component';
+import {ActivationService} from './services/activation.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent },

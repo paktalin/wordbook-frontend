@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Word} from '../Word';
+import {Word} from '../../DTO/Word';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {Tag} from '../Tag';
-import {AuthService} from '../auth.service';
+import {Tag} from '../../DTO/Tag';
+import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {AlertService} from '../alert/alert.service';
-import {UserResponse} from '../UserResponse';
+import {AlertService} from '../../services/alert.service';
+import {UserResponse} from '../../DTO/UserResponse';
 
 // noinspection TsLint
 @Component({

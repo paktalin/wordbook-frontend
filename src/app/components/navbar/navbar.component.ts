@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isLoginPage(): boolean {
-    return  this.router.url.endsWith('/login');
+    return  this.router.url.includes('/login');
   }
 
 }

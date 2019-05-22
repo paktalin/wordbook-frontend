@@ -2,8 +2,7 @@
   border-radius: 5%;
   color: white;
   padding: 9px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+
 }
 
 .alert-success {
@@ -11,4 +10,7 @@
 }
 .alert-danger {
   background-color: #ff1424;
+}
+div{
+  margin-bottom: 10px;
 }

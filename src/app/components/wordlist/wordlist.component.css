@@ -15,3 +15,7 @@ app-sorting{
   background-color: #EEF8FE;
   margin: 10px;
 }
+
+app-search-bar {
+  text-align: center;
+}

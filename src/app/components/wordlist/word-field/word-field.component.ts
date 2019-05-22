@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Word} from '../Word';
-import {State} from '../State';
+import {Word} from '../../../DTO/Word';
+import {State} from '../../../DTO/State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {WordlistComponent} from '../wordlist/wordlist.component';
-import {AlertService} from '../alert/alert.service';
-import {AuthService} from '../auth.service';
-import {UserResponse} from '../UserResponse';
+import {WordlistComponent} from '../wordlist.component';
+import {AlertService} from '../../../services/alert.service';
+import {AuthService} from '../../../services/auth.service';
+import {UserResponse} from '../../../DTO/UserResponse';
 
 @Component({
   selector: 'app-word-field',

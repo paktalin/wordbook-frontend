@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Word} from '../Word';
+import {Word} from '../../DTO/Word';
 
 @Component({
   selector: 'app-sorting',

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {User} from './User';
-import {AlertService} from './alert/alert.service';
+import {User} from '../DTO/User';
+import {AlertService} from './alert.service';
 import {Router} from '@angular/router';
-import {UserResponse} from './UserResponse';
+import {UserResponse} from '../DTO/UserResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,7 @@ export class AuthService {
           localStorage.setItem('access_token', result.token);
         }
       }));
+
   }
 
   register(username: string, password: string) {

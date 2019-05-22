@@ -1,0 +1,24 @@
+input {
+  margin-left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-left: none;
+  padding-bottom: 4px;
+  padding-top: 7px;
+}
+i {
+  border: solid black 0.5px;
+  margin-right: 0;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  padding: 5px;
+}
+.icon {
+  color: white;
+  background-color: #1d89ff;
+  text-align: center;
+  border: solid black 1px;
+}
+#usr {
+  padding-right: 9px;
+}
