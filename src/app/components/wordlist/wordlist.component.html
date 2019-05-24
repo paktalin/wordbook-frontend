@@ -1,5 +1,10 @@
 <app-sorting [wordList]="wordList"></app-sorting>
-<app-search-bar></app-search-bar>
+<div >
+  <div id="serch-bar">
+  <input placeholder="Search.." id="search" [(ngModel)]="request" (ngModelChange)="search(request)" >
+  <i class="fa fa-search icon"></i>
+  </div>
+</div>
 <form [formGroup]="newWord" (keydown)="submitByEnter($event)">
   <div class="word-form">
     <input class="word-input-field" type="text" placeholder="foreign word" formControlName="foreignControl">

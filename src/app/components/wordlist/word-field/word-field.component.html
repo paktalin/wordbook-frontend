@@ -1,12 +1,13 @@
 <div>
   <div class="word-form">
+    <input #tags type="text" class="word-input-field" disabled  [value]="word.tagIds">
     <input #foreignWord class="word-input-field" type="text" disabled [value]="word.foreignWord">
     <input #translatedWord class="word-input-field" type="text" disabled [value]="word.translatedWord">
 
     <div class="dropdown">
       <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu(menuDropdown)">⋮</button>
       <div #menuDropdown class="dropdown-content">
-        <button (click)="enableEditing(foreignWord, translatedWord, submitBlock)">Edit</button>
+        <button (click)="enableEditing(tags, foreignWord, translatedWord, submitBlock)">Edit</button>
         <button (click)="deleteWord()">Delete</button>
         <div class="dropdown">
           <button (click)="addTag(tagsDropdown)">Add tag</button>
@@ -19,7 +20,7 @@
   </div>
 
   <div #submitBlock class="submit-block">
-    <button class="bttn-unite bttn-md bttn-primary" (click)="submitEdits(foreignWord, translatedWord, submitBlock)">Submit</button>
-    <button class="bttn-unite bttn-md bttn-primary" (click)="cancelEdits(foreignWord, translatedWord, submitBlock)">Cancel</button>
+    <button class="bttn-unite bttn-md bttn-primary" (click)="submitEdits(tags, foreignWord, translatedWord, submitBlock)">Submit</button>
+    <button class="bttn-unite bttn-md bttn-primary" (click)="cancelEdits(tags, foreignWord, translatedWord, submitBlock)">Cancel</button>
   </div>
 </div>

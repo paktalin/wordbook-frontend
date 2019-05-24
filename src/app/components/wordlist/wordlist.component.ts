@@ -30,15 +30,18 @@ export class WordlistComponent implements OnInit {
   private tags: Tag[] = [];
   private newWord: FormGroup;
   public wordList: Word[] = [];
+  public words: Word[] = [];
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
+  request: string;
 
   private queryWordList() {
     return this.http.get<UserResponse>('/api/words').subscribe(result => {
       this.wordList = result.wordList.reverse();
+      this.words = result.wordList;
     }, error => this.authService.coordinateError(error)
     );
   }
@@ -88,5 +91,9 @@ export class WordlistComponent implements OnInit {
       }, error => this.authService.coordinateError(error)
       );
     tagName.value = '';
+  }
+
+  search(reqeust: string) {
+    this.wordList = this.words.filter(word => word.foreignWord.includes(reqeust) || word.translatedWord.includes(reqeust));
   }
 }

@@ -17,9 +17,11 @@ export class WordFieldComponent implements OnInit {
               private alertService: AlertService,
               private authService: AuthService) {
   }
+
   @Input() word: Word;
   @Input() wordListRef: WordlistComponent;
   private state: State = State.None;
+  tagNames: string[];
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -36,22 +38,25 @@ export class WordFieldComponent implements OnInit {
       }
     }
   }
+
   ngOnInit() {
   }
 
-  enableEditing(foreignWord: HTMLInputElement, translatedWord: HTMLInputElement, submitBlock: HTMLDivElement) {
+  enableEditing(tags: HTMLInputElement, foreignWord: HTMLInputElement, translatedWord: HTMLInputElement, submitBlock: HTMLDivElement) {
     if (this.state === State.None) {
       this.state = State.Edit;
       this.closeDropdownMenu();
+      tags.disabled = false;
       foreignWord.disabled = false;
       translatedWord.disabled = false;
       submitBlock.style.display = 'block';
     }
   }
 
-  finishEditing(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
+  finishEditing(tags: HTMLInputElement, foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
     foreignField.disabled = true;
     translatedField.disabled = true;
+    tags.disabled = true;
     submitBlock.style.display = 'none';
     this.state = State.None;
   }
@@ -60,20 +65,20 @@ export class WordFieldComponent implements OnInit {
     menuDropdown.classList.toggle('show');
   }
 
-  submitEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
+  submitEdits(tags: HTMLInputElement, foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
     this.word.foreignWord = foreignField.value;
     this.word.translatedWord = translatedField.value;
     this.http.put<UserResponse>('api/update_word', this.word, this.httpOptions).subscribe(result => {
-      this.alertService.success(result.message);
-    }, error => this.authService.coordinateError(error)
+        this.alertService.success(result.message);
+      }, error => this.authService.coordinateError(error)
     );
-    this.finishEditing(foreignField, translatedField, submitBlock);
+    this.finishEditing(tags, foreignField, translatedField, submitBlock);
   }
 
-  cancelEdits(foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
+  cancelEdits(tags: HTMLInputElement, foreignField: HTMLInputElement, translatedField: HTMLInputElement, submitBlock: HTMLDivElement) {
     foreignField.value = this.word.foreignWord;
     translatedField.value = this.word.translatedWord;
-    this.finishEditing(foreignField, translatedField, submitBlock);
+    this.finishEditing(tags, foreignField, translatedField, submitBlock);
   }
 
   deleteWord() {
@@ -88,6 +93,11 @@ export class WordFieldComponent implements OnInit {
   }
 
   getTags() {
-    return this.wordListRef.getTags();
+    this.wordListRef.getTags().forEach(tag => {
+        if (this.word.tagIds.includes(tag)) {
+          this.tagNames.push(tag.name);
+        }
+      }
+    );
   }
 }

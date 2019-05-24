@@ -19,3 +19,28 @@ app-sorting{
 app-search-bar {
   text-align: center;
 }
+#search {
+  margin-right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-right: none;
+  padding-bottom: 4.3px;
+  padding-top: 6.5px;
+}
+i {
+  border: solid black 1px;
+  margin-left: 0;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 11.5px 10px 13px;
+
+}
+.icon {
+  color: white;
+  background-color: #1d89ff;
+  text-align: center;
+}
+#serch-bar {
+  position: center;
+  text-align: center;
+}

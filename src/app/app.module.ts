@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WordlistComponent } from './components/wordlist/wordlist.component';
 import {HttpClientModule} from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RegFormComponent } from './components/reg-form/reg-form.component';
@@ -14,7 +14,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TagComponent } from './components/tag/tag.component';
 import {AlertComponent} from './components/alert/alert.component';
 import { TagsListComponent } from './components/tags-list/tags-list.component';
-import {SearchBarComponent} from './components/wordlist/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +26,7 @@ import {SearchBarComponent} from './components/wordlist/search-bar/search-bar.co
     SortingComponent,
     NavbarComponent,
     TagComponent,
-    TagsListComponent,
-    SearchBarComponent
+    TagsListComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +40,8 @@ import {SearchBarComponent} from './components/wordlist/search-bar/search-bar.co
         },
         whitelistedDomains: ['localhost:9090']
       }
-    })
+    }),
+    FormsModule
   ],
   providers: [AlertComponent],
   bootstrap: [AppComponent]

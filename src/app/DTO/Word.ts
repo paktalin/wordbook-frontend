@@ -1,11 +1,12 @@
+import {Tag} from './Tag';
+
 export class Word {
-  constructor(foreignWord: string, translatedWord: string, userId?: number, wordId?: number) {
+  constructor(foreignWord: string, translatedWord: string, userId?: number, wordId?: number, tagIds?: Tag[]) {
     this.foreignWord = foreignWord;
     this.translatedWord = translatedWord;
-    if (userId) { this.userId = userId;
-    } else { this.userId = null; }
-    if (wordId) { this.id = wordId;
-    } else { this.id = null; }
+    userId ? this.userId = userId : this.userId = null;
+    wordId ? this.id = wordId : this.id = null;
+    tagIds ? this.tagIds = tagIds : this.tagIds = null;
   }
 
   public userId: number;
@@ -13,4 +14,5 @@ export class Word {
   public translatedWord: string;
   public created: string;
   public id: number;
+  public tagIds: Tag[];
 }
