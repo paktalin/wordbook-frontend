@@ -23,7 +23,7 @@ export class WordFieldComponent implements OnInit {
   @Input() word: Word;
   @Input() wordListRef: WordlistComponent;
   private state: State = State.None;
-  tagNames: string[];
+  tagNames: string[] = [];
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -43,12 +43,13 @@ export class WordFieldComponent implements OnInit {
 
   ngOnInit() {
     this.wordListRef.getTags().forEach(tag => {
-        if (this.word.tagIds != null && this.word.tagIds.includes(tag)) {
+        console.log(this.word.tagIds);
+        if (this.word.tagIds != null && this.word.tagIds.includes(tag.id)) {
           this.tagNames.push(tag.name);
         }
+        console.log(this.tagNames);
       }
     );
-    console.log(this.tagNames);
   }
 
   enableEditing(tags: HTMLInputElement, foreignWord: HTMLInputElement, translatedWord: HTMLInputElement, submitBlock: HTMLDivElement) {
@@ -102,31 +103,6 @@ export class WordFieldComponent implements OnInit {
   }
 
   getTags() {
-    this.wordListRef.getTags().forEach(tag => {
-        if (this.word.tagIds != null && this.word.tagIds.includes(tag)) {
-          this.tagNames.push(tag.name);
-        }
-      }
-    );
     return this.wordListRef.getTags();
-  }
-
-  getTagsByIds() {
-    /*const tagNames: string[] = [];
-    for (const tagId of tagIds) {
-      for (const tag of this.getTags()) {
-        if (tagId === tag.id) {
-          tagNames.push(tag);
-        }
-      }
-    }
-    return tagNames;*/
-
-    this.wordListRef.getTags().forEach(tag => {
-        if (this.word.tagIds != null && this.word.tagIds.includes(tag)) {
-          this.tagNames.push(tag.name);
-        }
-      }
-    );
   }
 }

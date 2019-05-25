@@ -48,7 +48,6 @@ export class WordlistComponent implements OnInit {
 
   private queryTags() {
     return this.http.get<UserResponse>('/api/tags').subscribe(result => {
-      console.log(result);
       this.tags = result.tagList;
     }, error => this.authService.coordinateError(error)
     );
