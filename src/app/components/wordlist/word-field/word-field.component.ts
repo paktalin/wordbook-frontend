@@ -6,8 +6,6 @@ import {WordlistComponent} from '../wordlist.component';
 import {AlertService} from '../../../services/alert.service';
 import {AuthService} from '../../../services/auth.service';
 import {UserResponse} from '../../../DTO/UserResponse';
-import {Tag} from '../../../DTO/Tag';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-word-field',
@@ -23,7 +21,7 @@ export class WordFieldComponent implements OnInit {
   @Input() word: Word;
   @Input() wordListRef: WordlistComponent;
   private state: State = State.None;
-  tagNames: string[] = [];
+  tagNames = '';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -43,11 +41,13 @@ export class WordFieldComponent implements OnInit {
 
   ngOnInit() {
     this.wordListRef.getTags().forEach(tag => {
-        console.log(this.word.tagIds);
-        if (this.word.tagIds != null && this.word.tagIds.includes(tag.id)) {
-          this.tagNames.push(tag.name);
+      if (this.word.tagIds != null && this.word.tagIds.includes(tag.id)) {
+        let separator = '; ';
+        if (this.tagNames.length === 0) {
+          separator = '';
         }
-        console.log(this.tagNames);
+        this.tagNames = this.tagNames.concat(separator + tag.name);
+        }
       }
     );
   }
