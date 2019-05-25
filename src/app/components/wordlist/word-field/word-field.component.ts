@@ -41,12 +41,8 @@ export class WordFieldComponent implements OnInit {
 
   ngOnInit() {
     this.wordListRef.getTags().forEach(tag => {
-      if (this.word.tagIds != null && this.word.tagIds.includes(tag.id)) {
-        let separator = '; ';
-        if (this.tagNames.length === 0) {
-          separator = '';
-        }
-        this.tagNames = this.tagNames.concat(separator + tag.name);
+        if (this.word.tagIds != null && this.word.tagIds.includes(tag.id)) {
+          this.addTagName(tag.name);
         }
       }
     );
@@ -98,11 +94,19 @@ export class WordFieldComponent implements OnInit {
     }, error => this.authService.coordinateError(error));
   }
 
-  addTag(tagsDropdown: HTMLDivElement) {
+  enableAddTag(tagsDropdown: HTMLDivElement) {
     tagsDropdown.classList.toggle('show');
   }
 
   getTags() {
     return this.wordListRef.getTags();
+  }
+
+  addTagName(tagName: string) {
+    let separator = '; ';
+    if (this.tagNames.length === 0) {
+      separator = '';
+    }
+    this.tagNames = this.tagNames.concat(separator + tagName);
   }
 }

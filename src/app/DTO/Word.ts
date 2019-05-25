@@ -4,7 +4,7 @@ export class Word {
     this.translatedWord = translatedWord;
     userId ? this.userId = userId : this.userId = null;
     wordId ? this.id = wordId : this.id = null;
-    tagIds ? this.tagIds = tagIds : this.tagIds = null;
+    tagIds ? this.tagIds = tagIds : this.tagIds = [];
   }
 
   public userId: number;

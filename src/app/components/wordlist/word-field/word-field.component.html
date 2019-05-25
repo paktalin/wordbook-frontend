@@ -10,9 +10,9 @@
         <button (click)="enableEditing(tags, foreignWord, translatedWord, submitBlock)">Edit</button>
         <button (click)="deleteWord()">Delete</button>
         <div class="dropdown">
-          <button (click)="addTag(tagsDropdown)">Add tag</button>
+          <button (click)="enableAddTag(tagsDropdown)">Add tag</button>
           <div #tagsDropdown class="dropdown-content">
-            <app-tag *ngFor="let tag of getTags()" [tag]="tag" [word]="word"></app-tag>
+            <app-tag *ngFor="let tag of getTags()" [wordFieldRef]="this" [tag]="tag" [word]="word"></app-tag>
           </div>
         </div>
       </div>
