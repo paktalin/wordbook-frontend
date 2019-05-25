@@ -6,6 +6,8 @@ import {WordlistComponent} from '../wordlist.component';
 import {AlertService} from '../../../services/alert.service';
 import {AuthService} from '../../../services/auth.service';
 import {UserResponse} from '../../../DTO/UserResponse';
+import {Tag} from '../../../DTO/Tag';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-word-field',
@@ -40,6 +42,13 @@ export class WordFieldComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.wordListRef.getTags().forEach(tag => {
+        if (this.word.tagIds != null && this.word.tagIds.includes(tag)) {
+          this.tagNames.push(tag.name);
+        }
+      }
+    );
+    console.log(this.tagNames);
   }
 
   enableEditing(tags: HTMLInputElement, foreignWord: HTMLInputElement, translatedWord: HTMLInputElement, submitBlock: HTMLDivElement) {
@@ -94,7 +103,27 @@ export class WordFieldComponent implements OnInit {
 
   getTags() {
     this.wordListRef.getTags().forEach(tag => {
-        if (this.word.tagIds.includes(tag)) {
+        if (this.word.tagIds != null && this.word.tagIds.includes(tag)) {
+          this.tagNames.push(tag.name);
+        }
+      }
+    );
+    return this.wordListRef.getTags();
+  }
+
+  getTagsByIds() {
+    /*const tagNames: string[] = [];
+    for (const tagId of tagIds) {
+      for (const tag of this.getTags()) {
+        if (tagId === tag.id) {
+          tagNames.push(tag);
+        }
+      }
+    }
+    return tagNames;*/
+
+    this.wordListRef.getTags().forEach(tag => {
+        if (this.word.tagIds != null && this.word.tagIds.includes(tag)) {
           this.tagNames.push(tag.name);
         }
       }
