@@ -1,6 +1,6 @@
 <div>
   <div class="word-form">
-    <input #tags type="text" class="word-input-field" disabled  [value]="word.tagIds">
+    <input #tags type="text" class="word-input-field" disabled [value]="word.tagIds">
     <input #foreignWord class="word-input-field" type="text" disabled [value]="word.foreignWord">
     <input #translatedWord class="word-input-field" type="text" disabled [value]="word.translatedWord">
 
@@ -19,8 +19,14 @@
     </div>
   </div>
 
-  <div #submitBlock class="submit-block">
-    <button class="bttn-unite bttn-md bttn-primary" (click)="submitEdits(tags, foreignWord, translatedWord, submitBlock)">Submit</button>
-    <button class="bttn-unite bttn-md bttn-primary" (click)="cancelEdits(tags, foreignWord, translatedWord, submitBlock)">Cancel</button>
+  <div class="submit-block-outer">
+    <div #submitBlock class="submit-block-inner">
+      <button class="bttn-unite bttn-md bttn-primary"
+              (click)="submitEdits(tags, foreignWord, translatedWord, submitBlock)">Submit
+      </button>
+      <button class="bttn-unite bttn-md bttn-primary"
+              (click)="cancelEdits(tags, foreignWord, translatedWord, submitBlock)">Cancel
+      </button>
+    </div>
   </div>
 </div>

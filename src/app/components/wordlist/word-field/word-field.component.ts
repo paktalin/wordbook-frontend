@@ -49,7 +49,7 @@ export class WordFieldComponent implements OnInit {
       tags.disabled = false;
       foreignWord.disabled = false;
       translatedWord.disabled = false;
-      submitBlock.style.display = 'block';
+      submitBlock.style.display = 'inline-block';
     }
   }
 

@@ -29,6 +29,11 @@
 
 .show {display:block;}
 
-.submit-block {
+.submit-block-inner {
   display: none;
+}
+
+.submit-block-outer {
+  width: 100%;
+  text-align: center;
 }
