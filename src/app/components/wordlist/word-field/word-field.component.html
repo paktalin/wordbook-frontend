@@ -5,12 +5,12 @@
     <input #translatedWord class="word-input-field" type="text" disabled [value]="word.translatedWord">
 
     <div class="dropdown">
-      <button class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu(menuDropdown)">⋮</button>
+      <button id="menu-dropdown-button" class="bttn-unite bttn-md bttn-primary" (click)="openDropdownMenu(menuDropdown)">⋮</button>
       <div #menuDropdown class="dropdown-content">
         <button (click)="enableEditing(tags, foreignWord, translatedWord, submitBlock)">Edit</button>
         <button (click)="deleteWord()">Delete</button>
         <div class="dropdown">
-          <button (click)="enableAddTag(tagsDropdown)">Add tag</button>
+          <button id="add-tag-dropdown-button" (click)="enableAddTag(tagsDropdown)">Add tag</button>
           <div #tagsDropdown class="dropdown-content">
             <app-tag *ngFor="let tag of getTags()" [wordFieldRef]="this" [tag]="tag" [word]="word"></app-tag>
           </div>

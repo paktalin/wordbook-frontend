@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Word} from '../../../DTO/Word';
 import {State} from '../../../DTO/State';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -108,5 +108,12 @@ export class WordFieldComponent implements OnInit {
       separator = '';
     }
     this.tagNames = this.tagNames.concat(separator + tagName);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (event.target.id !== 'menu-dropdown-button' && event.target.id !== 'add-tag-dropdown-button') {
+      this.closeDropdownMenu();
+    }
   }
 }
