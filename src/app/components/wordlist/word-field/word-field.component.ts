@@ -112,6 +112,7 @@ export class WordFieldComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
+    // @ts-ignore
     if (event.target.id !== 'menu-dropdown-button' && event.target.id !== 'add-tag-dropdown-button') {
       this.closeDropdownMenu();
     }
